@@ -38,6 +38,10 @@
     
       <li><a href="/archives">Archives</a></li>
     
+      <li><a href="https://github.com/sdyxch">Github</a></li>
+    
+      <li><a href="http://www.weibo.com/801963408">Weibo</a></li>
+    
   </ul>
   <div class="clearfix"></div>
 </nav>
@@ -58,7 +62,7 @@
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -70,503 +74,7 @@
   
 
     </header>
-    <div class="entry">
-      
-        <h2 id="-">事出有因</h2>
-<ul>
-<li>项目迭代</li>
-<li>使用angularjs 新版本(1.2.8)</li>
-<li>unit test 补充</li>
-</ul>
-<h2 id="-">必有果</h2>
-<ul>
-<li>迭代完成</li>
-<li>更深入了解框架</li>
-</ul>
-<p><strong>注:</strong>
-以前在directive里使用isolate scope 发现 会isolate同一elm的其他directive
-新版本修复了这个问题</p>
-<h2 id="-">栗子</h2>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-</pre></td><td class="code"><pre><span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.directives'</span>)
-  .directive <span class="string">'chatMain'</span>, [<span class="string">'$log'</span>, <span class="function"><span class="params">($log)</span> -&gt;</span>
-    <span class="attribute">restrict</span>: <span class="string">'E'</span>
-    <span class="attribute">replace</span>: <span class="literal">true</span>
-    <span class="attribute">templateUrl</span>: <span class="string">'views/chat.html'</span>
-    <span class="attribute">controller</span>: <span class="string">'ChatCtrl'</span>
-    <span class="attribute">require</span>: <span class="string">'^chatMain'</span>
-    <span class="attribute">link</span>: <span class="function"><span class="params">(scope, el, attrs, ctrl)</span> -&gt;</span>
-      <span class="comment">##</span>
-  ]
-
-<span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.controllers'</span>)
-  .controller <span class="string">'ChatCtrl'</span>, [
-    <span class="string">'$scope'</span>
-    <span class="function"><span class="params">($scope)</span> -&gt;</span>
-      ctrl = @
-      $scope.current = <span class="literal">null</span>
-
-      <span class="property">@shouldFocus</span> = <span class="function"><span class="params">(customer)</span> -&gt;</span>
-        $scope.current <span class="keyword">is</span> customer <span class="keyword">and</span> customer <span class="keyword">isnt</span> <span class="literal">null</span>
-
-      <span class="property">@focus</span> = <span class="function"><span class="params">(customer)</span> -&gt;</span>
-        $scope.current = customer
-
-      ...
-
-      <span class="keyword">return</span>
-  ]
-
-<span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.directives'</span>)
-  .directive <span class="string">'chatItem'</span>,
-    [
-      <span class="function"><span class="params">()</span> -&gt;</span>
-        <span class="attribute">restrict</span>: <span class="string">'E'</span>
-        <span class="attribute">replace</span>: <span class="literal">true</span>
-        <span class="attribute">scope</span>:
-          <span class="attribute">customer</span>: <span class="string">'='</span>
-        <span class="attribute">require</span>: <span class="string">'^chatMain'</span>
-        <span class="attribute">templateUrl</span>: <span class="string">'views/chat.item.html'</span>
-        <span class="attribute">link</span>: <span class="function"><span class="params">(scope, el, attrs, ctrl)</span> -&gt;</span>
-          scope.<span class="function"><span class="title">shouldFocus</span> = <span class="params">(customer)</span> -&gt;</span>
-            ctrl.shouldFocus customer
-
-          scope.<span class="function"><span class="title">focus</span> = <span class="params">(customer)</span> -&gt;</span>
-            el.addClass <span class="string">'active'</span>
-            ctrl.focus customer
-
-          ...
-      ]
-</pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-</pre></td><td class="code"><pre><span class="string">'use strict'</span>
-describe <span class="string">'Unit testing for chatItem directive'</span>, <span class="function"><span class="params">()</span> -&gt;</span>
-  scope = elm = mainCtrl = <span class="literal">null</span>
-  beforeEach<span class="function"> -&gt;</span>
-    <span class="built_in">module</span> <span class="string">'views/chat.item.html'</span>
-    <span class="built_in">module</span> <span class="string">'ChatWebClient'</span>, <span class="function"><span class="params">($provide)</span> -&gt;</span>
-      <span class="literal">null</span>
-    inject <span class="function"><span class="params">($compile, $rootScope)</span> -&gt;</span>
-      scope = $rootScope.$<span class="keyword">new</span>()
-      scope.customer =
-        <span class="attribute">username</span>: <span class="string">'customer1'</span>
-        <span class="attribute">id</span>: <span class="string">'customer1'</span>
-      elm = $compile(<span class="string">'&lt;chat-item customer="customer"&gt;&lt;/chat-item&gt;'</span>)(scope)
-      mainCtrl =
-        <span class="attribute">shouldFocus</span>: sinon.spy()
-        <span class="attribute">focus</span>: sinon.spy()
-      elm.data <span class="string">'$chatMainController'</span>, mainCtrl
-      scope.$digest()
-
-  it <span class="string">'when call shouldFocus then ctrl shouldFocus should been called'</span>,<span class="function"> -&gt;</span>
-    elm.isolateScope().shouldFocus <span class="string">'xx'</span>
-    mainCtrl.shouldFocus.should.have.been.calledWith <span class="string">'xx'</span>
-
-  it <span class="string">'when call focus then ctrl focus should been called and el should have class active'</span>,<span class="function"> -&gt;</span>
-    elm.isolateScope().focus <span class="string">'xx'</span>
-    mainCtrl.focus.should.have.been.calledWith <span class="string">'xx'</span>
-    elm.hasClass(<span class="string">'active'</span>).should.have.been.<span class="literal">true</span>
-
-  ...
-</pre></td></tr></table></figure>
-
-<h2 id="-">然后..</h2>
-<h3 id="isolate-scope">isolate scope</h3>
-<p>通过新版本 可以通过 elm.isolateScope() 获取 directive isolate scope</p>
-<h4 id="scope-isolatescope">scope 与 isolateScope</h4>
-<p>angular源码(1.2.8):</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-</pre></td><td class="code"><pre><span class="keyword">if</span> (nodeLinkFn) {
-  <span class="keyword">if</span> (nodeLinkFn.scope) {
-    childScope = scope.<span class="variable">$new</span>();
-    <span class="variable">$node</span>.data(<span class="string">'$scope'</span>, childScope);
-  } <span class="keyword">else</span> {
-    childScope = scope;
-  }
-
-  ...
-
-}
-
-...
-
-<span class="keyword">if</span> (newIsolateScopeDirective) {
-  <span class="keyword">var</span> LOCAL_REGEXP = /^\s*([@=&])(\??)\s*(\w*)\s*$/;
-  <span class="keyword">var</span> <span class="variable">$linkNode</span> = jqLite(linkNode);
-
-  isolateScope = scope.<span class="variable">$new</span>(<span class="keyword">true</span>);
-
-  <span class="keyword">if</span> (templateDirective && (templateDirective === newIsolateScopeDirective.<span class="variable">$$originalDirective</span>)) {
-    <span class="variable">$linkNode</span>.data(<span class="string">'$isolateScope'</span>, isolateScope) ;
-  } <span class="keyword">else</span> {
-    <span class="variable">$linkNode</span>.data(<span class="string">'$isolateScopeNoTemplate'</span>, isolateScope);
-  }
-
-  ...
-
-}
-
-Scope.prototype = {
-  <span class="variable">$new</span>: <span class="function"><span class="keyword">function</span><span class="params">(isolate)</span> {</span>
-    <span class="keyword">var</span> Child,
-        child;
-
-    <span class="keyword">if</span> (isolate) {
-      child = <span class="keyword">new</span> Scope();
-      child.<span class="variable">$root</span> = this.<span class="variable">$root</span>;
-      <span class="comment">// ensure that there is just one async queue per $rootScope and its children</span>
-      child.<span class="variable">$$asyncQueue</span> = this.<span class="variable">$$asyncQueue</span>;
-      child.<span class="variable">$$postDigestQueue</span> = this.<span class="variable">$$postDigestQueue</span>;
-    } <span class="keyword">else</span> {
-      Child = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>}; <span class="comment">// should be anonymous; This is so that when the minifier munges</span>
-        <span class="comment">// the name it does not become random set of chars. This will then show up as class</span>
-        <span class="comment">// name in the debugger.</span>
-      Child.prototype = this;
-      child = <span class="keyword">new</span> Child();
-      child.<span class="variable">$id</span> = nextUid();
-    }
-    child[<span class="string">'this'</span>] = child;
-    child.<span class="variable">$$listeners</span> = {};
-    child.<span class="variable">$parent</span> = this;
-    child.<span class="variable">$$watchers</span> = child.<span class="variable">$$nextSibling</span> = child.<span class="variable">$$childHead</span> = child.<span class="variable">$$childTail</span> = <span class="keyword">null</span>;
-    child.<span class="variable">$$prevSibling</span> = this.<span class="variable">$$childTail</span>;
-    <span class="keyword">if</span> (this.<span class="variable">$$childHead</span>) {
-      this.<span class="variable">$$childTail</span>.<span class="variable">$$nextSibling</span> = child;
-      this.<span class="variable">$$childTail</span> = child;
-    } <span class="keyword">else</span> {
-      this.<span class="variable">$$childHead</span> = this.<span class="variable">$$childTail</span> = child;
-    }
-    <span class="keyword">return</span> child;
-  },
-
-  ...
-</pre></td></tr></table></figure>
-
-<p>可见:</p>
-<ul>
-<li><strong>如果directive scope: false</strong> 不会创建新的scope</li>
-<li><strong>如果directive scope: ture</strong> 创建一个继承自parent的scope</li>
-<li><strong>如果directive scope: {...}</strong> 创建一个继承自parent的scope
-同时创建一个新的scope 赋值给 $isolateScope(or $isolateScopeNoTemplate)
-<a href="https://github.com/angular/angular.js/commit/909cabd36d779598763cc358979ecd85bb40d4d7" target="_blank">以前版本中  isolate scope 会直接 child = new Scope(true)</a></li>
-</ul>
-<p>另外:</p>
-<ul>
-<li>无论scope取值为何，都可以通过scope.$parent 在link中访问到parent scope</li>
-</ul>
-<h4 id="new-scope">new scope</h4>
-<p>遇到过在ngRepeat里 2-way data binding ngModel 结果 $setViewValue不起作用</p>
-<p>angular源码(1.2.8) ngRepeat:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="keyword">if</span> (block.scope) {
-  <span class="comment">// if we have already seen this object, then we need to reuse the</span>
-  <span class="comment">// associated scope/element</span>
-  childScope = block.scope;
-
-  nextNode = previousNode;
-  <span class="keyword">do</span> {
-    nextNode = nextNode.nextSibling;
-  } <span class="keyword">while</span>(nextNode && nextNode[NG_REMOVED]);
-
-  <span class="keyword">if</span> (getBlockStart(block) != nextNode) {
-    <span class="comment">// existing item which got moved</span>
-    <span class="variable">$animate</span>.move(getBlockElements(block.<span class="keyword">clone</span>), <span class="keyword">null</span>, jqLite(previousNode));
-  }
-  previousNode = getBlockEnd(block);
-  } <span class="keyword">else</span> {
-    <span class="comment">// new item which we don't know about</span>
-    childScope = <span class="variable">$scope</span>.<span class="variable">$new</span>();
-  }
-  childScope[valueIdentifier] = value;
-  ...
-}
-</pre></td></tr></table></figure>
-
-<p>可以看到在ngRepeat中 创建了新的继承子parent scope的 childScope = $scope.$new();
-由于javascript 原始数据类型的特征  无法实现双向绑定</p>
-<p><a href="https://github.com/angular/angular.js/wiki/Understanding-Scopes" target="_blank">参考wiki:</a></p>
-<p>until you try 2-way data binding (i.e., form elements, ng-model) to a primitive (e.g., number, string, boolean) defined on the parent scope from inside the child scope. It doesn&#39;t work the way most people expect it should work. What happens is that the child scope gets its own property that hides/shadows the parent property of the same name. This is not something AngularJS is doing – this is how JavaScript prototypal inheritance works. New AngularJS developers often do not realize that ng-repeat, ng-switch, ng-view and ng-include all create new child scopes, so the problem often shows up when these directives are involved.</p>
-<p>If you really want/need to use a primitive, there are two workarounds:</p>
-<ul>
-<li><strong><em>Use $parent.parentScopeProperty in the child scope. This will prevent the child scope from creating its own property.</em></strong></li>
-<li><strong><em>Define a function on the parent scope, and call it from the child, passing the primitive value up to the parent (not always possible)</em></strong></li>
-</ul>
-<p><strong>另外transclude 也会创建新的 scope</strong></p>
-<p>angular源码(1.2.8):</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="keyword">if</span> (!transcludedScope) {
-  transcludedScope = scope.<span class="variable">$new</span>();
-  transcludedScope.<span class="variable">$$transcluded</span> = <span class="keyword">true</span>;
-  scopeCreated = <span class="keyword">true</span>;
-}
-
-<span class="keyword">var</span> <span class="keyword">clone</span> = transcludeFn(transcludedScope, cloneFn, controllers);
-<span class="keyword">if</span> (scopeCreated) {
-  <span class="keyword">clone</span>.on(<span class="string">'$destroy'</span>, bind(transcludedScope, transcludedScope.<span class="variable">$destroy</span>));
-}
-</pre></td></tr></table></figure>
-
-<p>transcludedScope 和 directive scope是兄弟关系 都继承自 parent scope</p>
-<h4 id="-">遇到的问题:</h4>
-<p>使用angular-bootstrap modal</p>
-<p><a href="https://github.com/angular-ui/bootstrap/blob/master/template/modal/window.html" target="_blank">angular-ui/bootstrap/template/modal/window.html</a>:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>&lt;<span class="keyword">div</span> tabindex=<span class="string">"-1"</span> <span class="type">class</span>=<span class="string">"modal fade "</span>
-  ng-<span class="type">class</span>=<span class="string">"{in: animate}"</span>
-  ng-style=<span class="string">"{'z-index': 1050 + index*10, display: 'block'}"</span>
-  ng-click=<span class="string">"close($event)"</span>&gt;
-    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"modal-dialog"</span>&gt;
-      &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"modal-content"</span> ng-transclude&gt;&lt;/<span class="keyword">div</span>&gt;
-    &lt;/<span class="keyword">div</span>&gt;
-&lt;/<span class="keyword">div</span>&gt;
-</pre></td></tr></table></figure>
-
-<p>在modalCtl 定义 $scope.message = &#39;hello world&#39;
-modal模板中</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="keyword">...</span>
-&lt;textarea class=<span class="string">"chat"</span> ng-model=<span class="string">"message"</span> rows=<span class="string">"8"</span> ng-enter=<span class="string">"broadcast()"</span>&gt;&lt;/textarea&gt;
-<span class="keyword">...</span>
-</pre></td></tr></table></figure>
-
-<p>同样因为message是字符串类型 出现了问题 修改为:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="subst">&lt;</span>textarea class<span class="subst">=</span><span class="string">"chat"</span> ng<span class="attribute">-model</span><span class="subst">=</span><span class="string">"$parent.message"</span> <span class="keyword">rows</span><span class="subst">=</span><span class="string">"8"</span> ng<span class="attribute">-enter</span><span class="subst">=</span><span class="string">"broadcast()"</span><span class="subst">&gt;&lt;</span>/textarea<span class="subst">&gt;</span>
-</pre></td></tr></table></figure>
-
-<h3 id="test-require-other-directive-s-">test require other directive(s)</h3>
-<p>两种方法:</p>
-<h4 id="-template-direcitve">构建template 包含两个direcitve</h4>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>chatMainElm = $compile(<span class="comment">'<span class="xmlDocTag">&lt;chat-main&gt;</span><span class="xmlDocTag">&lt;/chat-main&gt;</span>')(scope)</span>
-chatMainCtrl = chatMainElm.controller(<span class="comment">'chatMain')</span>
-sinon.stub chatMainCtrl, <span class="comment">'blur'</span>
-chatItemElm = angular.element <span class="comment">'<span class="xmlDocTag">&lt;chat-item&gt;</span><span class="xmlDocTag">&lt;/chat-item&gt;</span>'</span>
-chatMainElm.append chatItemElm
-chatItemElm = $compile(chatItemElm)(scope)
-</pre></td></tr></table></figure>
-
-<h4 id="mock-a-ctrl-">mock a ctrl (比较喜欢这种)</h4>
-<p><strong>elm.data &#39;$ + directive name + Controller&#39;</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-</pre></td><td class="code"><pre>mainCtrl =
-  shouldFocus: <span class="filename">sinon.spy()
-  blur</span>: <span class="filename">sinon.spy()
-  focus</span>: <span class="filename">sinon.spy()
-  closeChat</span>: <span class="filename">sinon.spy()
-elm.data '$chatMainController', mainCtrl</span>
-</pre></td></tr></table></figure>
-
-<p>Have Fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -582,7 +90,7 @@ elm.data '$chatMainController', mainCtrl</span>
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -594,55 +102,7 @@ elm.data '$chatMainController', mainCtrl</span>
   
 
     </header>
-    <div class="entry">
-      
-        <h2 id="compile-link-controller">compile link controller</h2>
-<h3 id="-">作用</h3>
-<h4 id="compile">compile</h4>
-<ul>
-<li>where Angular actually compiles your directive</li>
-<li>dom渲染前变形 not need scope</li>
-<li>同类directive共享方法</li>
-<li>性能</li>
-</ul>
-<h4 id="link">link</h4>
-<ul>
-<li>attach the scope data (2-way data binding)</li>
-<li>实现dom行为 ($watch $observe)</li>
-</ul>
-<h4 id="controller">controller</h4>
-<ul>
-<li>share api to other directives(requires)</li>
-</ul>
-<h3 id="-">执行时间</h3>
-<p>parent compile</p>
-<p>child compile</p>
-<p>parent controller</p>
-<p>parent pre-link</p>
-<p>child controller</p>
-<p>child pre-link</p>
-<p>child post-link</p>
-<p>parent post-link</p>
-<h4 id="prelink-postlink">prelink postlink</h4>
-<ul>
-<li>基本上不需要使用prelink</li>
-<li>prelink应用在当我们需要在link之前操作scope data而不是操作dom(会破坏绑定过程)</li>
-</ul>
-<p>Hava fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -658,7 +118,7 @@ elm.data '$chatMainController', mainCtrl</span>
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -670,153 +130,7 @@ elm.data '$chatMainController', mainCtrl</span>
   
 
     </header>
-    <div class="entry">
-      
-        <p>最近一直在抱怨titanium没有KVO..
-今天晚上突然想通了..
-自己真是SB..</p>
-<ul>
-<li>Js基于对象!</li>
-<li>就算ECMAScript 6不够普及 还有 ECMAScript 5啊!</li>
-</ul>
-<h3 id="watch">watch</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-</pre></td><td class="code"><pre><span class="keyword">unless</span> <span class="attribute">Object</span>::watch?
-  Object.defineProperty Object.prototype, <span class="string">'watch'</span>,
-    <span class="attribute">enumerable</span>: <span class="literal">false</span>
-    <span class="attribute">configurable</span>: <span class="literal">true</span>
-    <span class="attribute">writable</span>: <span class="literal">false</span>
-    <span class="attribute">value</span>: <span class="function"><span class="params">(props, handler)</span> -&gt;</span>
-      props = [].concat props
-      self = @
-      props.forEach <span class="function"><span class="params">(prop)</span> -&gt;</span>
-        oldval = self[prop]
-        newval = oldval
-        <span class="function"><span class="title">getter</span> = -&gt;</span>
-          newval;
-        <span class="function"><span class="title">setter</span> = <span class="params">(val)</span> -&gt;</span>
-          oldval = newval
-          newval = val
-          handler.call self, prop, oldval, newval
-        <span class="keyword">if</span> <span class="keyword">delete</span> self[prop]
-          Object.defineProperty self, prop,
-            <span class="attribute">get</span>: getter
-            <span class="attribute">set</span>: setter
-            <span class="attribute">enumerable</span>: <span class="literal">true</span>
-            <span class="attribute">configurable</span>: <span class="literal">true</span>
-
-<span class="keyword">unless</span> <span class="attribute">Object</span>::unwatch?
-  Object.defineProperty Object.prototype, <span class="string">'unwatch'</span>,
-    <span class="attribute">enumerable</span>: <span class="literal">false</span>
-    <span class="attribute">configurable</span>: <span class="literal">true</span>
-    <span class="attribute">writable</span>: <span class="literal">false</span>
-    <span class="attribute">value</span>: <span class="function"><span class="params">(props)</span> -&gt;</span>
-      props = [].concat props
-      self = @
-      props.forEach <span class="function"><span class="params">(prop)</span> -&gt;</span>
-        val = self[prop]
-        <span class="keyword">delete</span> self[prop]
-        @[prop] = val
-</pre></td></tr></table></figure>
-
-<h3 id="test">test</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-</pre></td><td class="code"><pre>obj =
-  <span class="attribute">aa</span>: <span class="string">'1'</span>
-  <span class="attribute">bb</span>:
-    <span class="attribute">bb</span>: <span class="number">1</span>
-  <span class="attribute">cc</span>: <span class="literal">true</span>
-  <span class="attribute">dd</span>: [<span class="number">1</span>]
-obj.watch <span class="string">'aa'</span>, <span class="function"><span class="params">(prop, oldval, newval)</span> -&gt;</span>
-  <span class="built_in">console</span>.log prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
-obj.watch [<span class="string">'bb'</span>, <span class="string">'cc'</span>, <span class="string">'dd'</span>], <span class="function"><span class="params">(prop, oldval, newval)</span> -&gt;</span>
-  <span class="built_in">console</span>.log prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
-obj.aa = <span class="string">'hello'</span>
-obj.bb = <span class="attribute">bb</span>:<span class="number">2</span>
-obj.cc = <span class="literal">false</span>
-obj.dd = [<span class="number">2</span>]
-obj.unwatch <span class="string">'aa'</span>
-obj.unwatch <span class="string">'bb'</span>
-obj.unwatch <span class="string">'cc'</span>
-obj.unwatch <span class="string">'dd'</span>
-obj.aa = <span class="string">'hello'</span>
-obj.bb =
-  <span class="attribute">bb</span>:<span class="number">3</span>
-obj.cc = <span class="literal">true</span>
-obj.dd = [<span class="number">3</span>]
-</pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -832,7 +146,7 @@ obj.dd = [<span class="number">3</span>]
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -844,79 +158,7 @@ obj.dd = [<span class="number">3</span>]
   
 
     </header>
-    <div class="entry">
-      
-        <h3 id="timeline">Timeline</h3>
-<iframe src='http://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=0Ah-SRE60GOxAdGhkYmZweDBqS3ZJZF9nMEVFYVVjaVE&font=Bevan-PotanoSans&maptype=TERRAIN&lang=zh-ch&height=400' width='100%' height='400' frameborder='0'></iframe>
-
-<h3 id="study">Study</h3>
-<ul>
-<li>Tiannium</li>
-<li>Responsive</li>
-<li>iOS(CocoaPods Audio AutoLayout iOS7..)</li>
-<li>Angularjs</li>
-</ul>
-<h3 id="read">Read</h3>
-<ul>
-<li><a href="http://book.douban.com/subject/6847760/" target="_blank">随遇而安</a></li>
-<li><a href="http://book.douban.com/subject/24371403/" target="_blank">过得刚好</a></li>
-<li><a href="http://book.douban.com/subject/20425053/" target="_blank">我所理解的生活</a></li>
-<li><a href="http://book.douban.com/subject/3374619/" target="_blank">花姑娘</a></li>
-<li><a href="http://book.douban.com/subject/1959270/" target="_blank">小世界</a></li>
-<li><a href="http://book.douban.com/subject/1678877/" target="_blank">鬼妈妈</a></li>
-<li><a href="http://book.douban.com/subject/1015767/" target="_blank">门萨的娼妓</a></li>
-<li><a href="http://book.douban.com/subject/6977935/" target="_blank">货币战争4</a></li>
-<li><a href="http://book.douban.com/subject/1396491/" target="_blank">第三帝国的兴亡</a></li>
-<li><a href="http://book.douban.com/subject/10564000/" target="_blank">弗朗索瓦·特吕弗</a></li>
-<li><a href="http://book.douban.com/people/bruce_yang/do" target="_blank">侯孝贤电影讲座</a></li>
-<li><a href="http://book.douban.com/subject/20390374/" target="_blank">响应式Web设计</a></li>
-<li><a href="http://book.douban.com/people/bruce_yang/do" target="_blank">走进交互设计</a></li>
-<li><a href="http://book.douban.com/subject/11610593/" target="_blank">iOS应用开发攻略</a></li>
-<li><a href="http://book.douban.com/subject/24669812/" target="_blank">Mastering Web Application Development with AngularJS</a></li>
-</ul>
-<h3 id="thoughts">Thoughts</h3>
-<ul>
-<li>Javascript组件化</li>
-<li>OOCSS &amp; SMACSS</li>
-<li>Responsive过分理想化</li>
-<li>Html5 Mobile App不靠谱 Desktop App越来越成熟</li>
-<li>合理使用Autolayout 拥抱Storyborad(Xib)</li>
-<li>纸质文学被边缘化 但其魅力是永恒的</li>
-<li>没落的不是电影 是商业电影</li>
-</ul>
-<h3 id="grow-up">Grow-up</h3>
-<ul>
-<li>完全&quot;抛弃&quot;后端</li>
-<li>饭菜烧得&quot;不错&quot;</li>
-<li>懂得节约</li>
-</ul>
-<h3 id="sorry">Sorry</h3>
-<ul>
-<li>许多老友一年未见</li>
-<li>许多书未读</li>
-<li>许多Todos未完成</li>
-</ul>
-<h3 id="wish">Wish</h3>
-<ul>
-<li>Have fun!</li>
-</ul>
-<h3 id="final">Final</h3>
-<p>不如我们换一换 就算一个礼物  -《礼物》2013最喜欢的一句话</p>
-<p>Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -932,7 +174,7 @@ obj.dd = [<span class="number">3</span>]
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -944,111 +186,7 @@ obj.dd = [<span class="number">3</span>]
   
 
     </header>
-    <div class="entry">
-      
-        <p>angular-ui bootstrap 对 bootstrap 3.0版本支持不是很好
-由于3.0版本修改了一些class name
-下面以datepicker和modal为例 介绍下对于3.0支持的修改
-从源码可以看到  angular-ui bootstrap 对于每个directive的template都存储在了 templateCache中
-所以大多数情况下 我们只需要覆盖其在templateCache对应的key 就可以很好地达到目的</p>
-<h3 id="datepicker">datepicker</h3>
-<ul>
-<li><p>3.0中icon统一以glyphicon开头
-比如 class=&quot;icon-chevron-left&quot; 3.0中改为 class=&quot;glyphicon glyphicon-chevron-left&quot;</p>
-</li>
-<li><p>3.0中button不能简单的只有一个基本的class btn
-比如  class=&quot;btn&quot; 3.0中改为 class=&quot;btn btn-default&quot;</p>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-</pre></td><td class="code"><pre>angular.module(<span class="string">'YourModule'</span>)
-  .run [
-    <span class="string">'$templateCache'</span>
-    ($templateCache) -&gt;
-      $templateCache.put <span class="string">'template/datepicker/datepicker.html'</span>,
-        <span class="keyword">...</span>
-  ]
-</pre></td></tr></table></figure>
-
-<p>同样道理 修改 &quot;template/datepicker/popup.html&quot;  这样就可以支持3.0了 很简单 (注意文件引入顺序)</p>
-<p>依据angularjs 后注册取代先注册的原则</p>
-<h3 id="modal">modal</h3>
-<p>对于modal 只是引用directive时的html标签需要稍作修改</p>
-<p>另外 对于IE8(angular 1.3明确表示不再支持IE8!!!赞)</p>
-<p>如果在script template中使用了directive会报错</p>
-<p>在angular的源码中发现</p>
-<p><strong>compile时会将script ng-template的内容以id为key存入$templateCache</strong></p>
-<p>(所以 可以使用ng-include 引入 script template)</p>
-<p>所以不需要将模板放在script标签内 直接使用字符串或者html文件</p>
-<p>这样在ie8下工作正常(参照$templateCache)</p>
-<p>ng/directive/script.js</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-</pre></td><td class="code"><pre><span class="keyword">var</span> scriptDirective = [<span class="string">'$templateCache'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$templateCache</span>)</span> {</span>
-  <span class="keyword">return</span> {
-    restrict: <span class="string">'E'</span>,
-    terminal: <span class="keyword">true</span>,
-    compile: <span class="function"><span class="keyword">function</span><span class="params">(element, attr)</span> {</span>
-      <span class="keyword">if</span> (attr.type == <span class="string">'text/ng-template'</span>) {
-        <span class="keyword">var</span> templateUrl = attr.id,
-            <span class="comment">// IE is not consistent, in scripts we have to read .text but in other nodes we have to read .textContent</span>
-            text = element[<span class="number">0</span>].text;
-
-        <span class="variable">$templateCache</span>.put(templateUrl, text);
-      }
-    }
-  };
-}];
-</pre></td></tr></table></figure>
-
-<p><strong>ps: 其实decorator 也是可以修改 directive restrict link的...</strong></p>
-<p>一般人我不告诉他</p>
-<p><a href="http://angular-tips.com/blog/2013/09/experiment-decorating-directives/" target="_blank">Experiment: Decorating Directives</a></p>
-<p>不过目前项目还没有用到</p>
-<p>项目中添加了一个小项目 需要用到想在这个项目的一些service 和 directive</p>
-<p>所以准备接下来做这样几件事情</p>
-<ul>
-<li>分成两个子项目</li>
-<li>公用的service directive 以及 bower</li>
-<li>grunt task 分离 可定义</li>
-<li>公用的grunt task</li>
-<li>不同的部署脚本
-压力山大!!!!</li>
-</ul>
-<p>Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -1064,7 +202,7 @@ obj.dd = [<span class="number">3</span>]
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -1076,37 +214,7 @@ obj.dd = [<span class="number">3</span>]
   
 
     </header>
-    <div class="entry">
-      
-        <p>十分非常极其不想把这篇归到titanium 渣渣 不解释! 跨平台就是为了解决一个大坑 然后引入很多小坑!
-本来完成了iOS下引入了 openamr 完成录制PCM然后转码AMR的方式
-但是感觉一点都不高大上 就开始研究iOS Android都录制speex+ogg封装的方式</p>
-<h2 id="ios">iOS</h2>
-<p>参考<a href="https://github.com/hailongz/vSpeex" target="_blank">vSpeex</a>
-非常好的加星寥寥无几的项目
-使用AudioSession
-添加播放时的距离感应器</p>
-<h2 id="android">Android</h2>
-<p>Jni编译坑了一把
-参考<a href="http://5e76.net/show-10532.html" target="_blank">GaussRecorder</a></p>
-<p>其实还是做两套! 一点都不跨平台!!
-感觉iOS Audio方面掌握的不是很好
-在今年最后一个月准备主要学习这方面
-Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -1122,7 +230,7 @@ Have fun!</p>
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -1134,63 +242,7 @@ Have fun!</p>
   
 
     </header>
-    <div class="entry">
-      
-        <h3 id="i18n">i18n</h3>
-<p>i18n可以作为filter dircctive等使用
-比如：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="code"><pre>&lt;span&gt;hello world | i18n&lt;/span&gt;
-
-angular.<span class="built_in">module</span>(<span class="string">'filters'</span>, [<span class="string">'locals'</span>])
-  .filter <span class="string">'i18n'</span>, [
-    <span class="string">'i18nMessages'</span>
-    <span class="function"><span class="params">(i18nMessages)</span> -&gt;</span>
-      <span class="function"><span class="params">(input)</span> -&gt;</span>
-        i18nMessages[input] ? input
-  ]
-
-angular.<span class="built_in">module</span>(<span class="string">'locals'</span>, [])
-  .value <span class="string">'i18nMessages'</span>,
-    hello <span class="attribute">world</span>: <span class="string">'hello world'</span>
-</pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">span</span> <span class="attribute">i18n</span>=<span class="value">"hello world"</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<p>对于后一种
-推荐使用<a href="https://github.com/PascalPrecht/angular-translate" target="_blank">angular-translate</a></p>
-<p>如果想在bulid-time 完成 translate
-使用grunt
-个人不推荐  不多讲述</p>
-<p>Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -1206,7 +258,7 @@ angular.<span class="built_in">module</span>(<span class="string">'locals'</span
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -1218,27 +270,7 @@ angular.<span class="built_in">module</span>(<span class="string">'locals'</span
   
 
     </header>
-    <div class="entry">
-      
-        <p>WCG2013 War3 th000  Moon
-War3最后一年
-青春
-GG GL
-Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -1254,7 +286,7 @@ Have fun!</p>
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -1266,31 +298,7 @@ Have fun!</p>
   
 
     </header>
-    <div class="entry">
-      
-        <h3 id="angular-ui-route">angular ui-route</h3>
-<p>angularjs发布了1.2正式版
-遇到一个问题 因为angular1.2中ngRoute分离开来成为了单独的module
-所以项目报错需要依赖angular ngRroute
-仔细查阅是因为 项目中即使用了ui-router的$state 同时使用了$location
-而$location属于ngRoute
-所以全部使用ui-router 不再 使用任何ngRoute里的内容
-替换掉了$location相关的方法</p>
-<p>Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
   <article class="post">
   
@@ -1306,7 +314,7 @@ Have fun!</p>
   </div>
 </div>
   
-  <div class="post-content">
+  <div class="post-content" style="margin-bottom: 0px;">
     <header>
       
         <div class="icon"></div>
@@ -1318,245 +326,7 @@ Have fun!</p>
   
 
     </header>
-    <div class="entry">
-      
-        <p>angular1.2 ngAnimate 有所改动</p>
-<h3 id="class">class</h3>
-<ul>
-<li>ngRepeat  enter, leave and move</li>
-<li>ngView  enter and leave</li>
-<li>ngInclude enter and leave</li>
-<li>ngSwitch  enter and leave</li>
-<li>ngIf  enter and leave</li>
-<li>ngClass add and remove</li>
-<li>ngShow &amp; ngHide add and remove (the ng-hide class value)</li>
-</ul>
-<h3 id="javascript-defined-animations">JavaScript-defined Animations</h3>
-<p>angular ngAnimate 可以使用js设置 比如 jquery tweenmax mootools..
-官方文档如是说：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-</pre></td><td class="code"><pre><span class="keyword">var</span> ngModule = angular.module(<span class="string">'YourApp'</span>, []);
-ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
-  <span class="keyword">return</span> {
-    enter: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span>
-      <span class="comment">//run the animation here and call done when the animation is complete</span>
-      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(cancelled)</span> {</span>
-        <span class="comment">//this (optional) function will be called when the animation</span>
-        <span class="comment">//completes or when the animation is cancelled (the cancelled</span>
-        <span class="comment">//flag will be set to true if cancelled).</span>
-      }
-    }
-    leave: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span> },
-    move: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span> },
-
-    <span class="comment">//animation that can be triggered before the class is added</span>
-    beforeAddClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
-
-    <span class="comment">//animation that can be triggered after the class is added</span>
-    addClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
-
-    <span class="comment">//animation that can be triggered before the class is removed</span>
-    beforeRemoveClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
-
-    <span class="comment">//animation that can be triggered after the class is removed</span>
-    removeClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> }
-  }
-});
-</pre></td></tr></table></figure>
-
-<p>可参考<a href="https://github.com/yearofmoo/ngAnimate-animate.css" target="_blank">ngAnimate-animate.css</a></p>
-<h3 id="css-defined-animations">CSS-defined Animations</h3>
-<ul>
-<li>CSS transitions</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
-<span class="comment">/*
- The animate class is apart of the element and the ng-enter class
- is attached to the element once the enter animation event is triggered
-*/</span>
-<span class="class">.reveal-animation</span><span class="class">.ng-enter</span> <span class="rules">{
- <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1</span>s linear all</span></span>; <span class="comment">/* Safari/Chrome */</span>
- <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1</span>s linear all</span></span>; <span class="comment">/* All other modern browsers and IE10+ */</span>
-
- <span class="comment">/* The animation preparation code */</span>
- <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span></span></span>;
-<span class="rule">}</span></span>
-
-<span class="comment">/*
- Keep in mind that you want to combine both CSS
- classes together to avoid any CSS-specificity
- conflicts
-*/</span>
-<span class="class">.reveal-animation</span><span class="class">.ng-enter</span><span class="class">.ng-enter-active</span> <span class="rules">{
- <span class="comment">/* The animation code itself */</span>
- <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span></span></span>;
-<span class="rule">}</span></span>
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"view-container"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-view</span> <span class="attribute">class</span>=<span class="value">"reveal-animation"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<ul>
-<li>CSS animations</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
-<span class="class">.reveal-animation</span><span class="class">.ng-enter</span> <span class="rules">{
-  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear</span></span>; <span class="comment">/* Safari/Chrome */</span>
-  <span class="rule"><span class="attribute">animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear</span></span>; <span class="comment">/* IE10+ and Future Browsers */</span>
-<span class="rule">}</span></span>
-<span class="at_rule">@<span class="keyword">-webkit-keyframes</span> enter_sequence </span>{
-  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span></span></span>; <span class="rule">}</span></span>
-  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span></span></span>; <span class="rule">}</span></span>
-}
-<span class="at_rule">@<span class="keyword">keyframes</span> enter_sequence </span>{
-  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span></span></span>; <span class="rule">}</span></span>
-  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span></span></span>; <span class="rule">}</span></span>
-}
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-
-<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"view-container"</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">ng-view</span> <span class="attribute">class</span>=<span class="value">"reveal-animation"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-</pre></td></tr></table></figure>
-
-<h3 id="-">以上都是废话 直接看文档好了.......</h3>
-<p>神奇的<a href="https://github.com/daneden/animate.css" target="_blank">animate.css</a>
-动画就是浮云了..</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-</pre></td><td class="code"><pre><span class="preprocessor">.call</span>-bubble, <span class="preprocessor">.red</span>-bubble
-  &<span class="preprocessor">.ng</span>-enter
-    animation swing <span class="number">.5</span>s
-  &<span class="preprocessor">.ng</span>-leave
-    animation fadeOut <span class="number">.5</span>s
-
-<span class="preprocessor">.chat</span>-box
-  &<span class="preprocessor">.ng</span>-enter
-    animation fadeInDown <span class="number">.25</span>s
-  &<span class="preprocessor">.ng</span>-leave
-    animation fadeOutUp <span class="number">.25</span>s
-
-<span class="preprocessor">.chat</span>-detail
-  &<span class="preprocessor">.customer</span>_text
-    &<span class="preprocessor">.ng</span>-enter
-      animation slideInLeft <span class="number">.25</span>s
-  &<span class="preprocessor">.csr</span>_text
-    &<span class="preprocessor">.ng</span>-enter
-      animation slideInRight <span class="number">.25</span>s
-  &<span class="preprocessor">.customer</span>_call
-    &<span class="preprocessor">.ng</span>-enter
-      animation swing <span class="number">.5</span>s
-</pre></td></tr></table></figure>
-
-<p>ps: stylus 自己写@keyframes animation transform 就是个渣渣啊...</p>
-<p>Have fun!</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
-
-
 
 
 <nav id="pagination">
