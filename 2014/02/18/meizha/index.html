@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>grunt angular templates | 我是你爸爸</title>
+  <title>iOS7 study | 我是你爸爸</title>
   <meta name="author" content="杨鑫诚Bruce">
   
   <meta name="description" content="我是你爸爸">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="grunt angular templates"/>
+  <meta property="og:title" content="iOS7 study"/>
   <meta property="og:site_name" content="我是你爸爸"/>
 
   
@@ -65,22 +65,20 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-11-17T15:25:00.000Z"><a href="/2013/11/17/angular-grunt-ngtemplates/">Nov 17 2013</a></time>
+        <time datetime="2014-02-18T15:00:00.000Z"><a href="/2014/02/18/meizha/">Feb 18 2014</a></time>
       
       
   
-    <h1 class="title">grunt angular templates</h1>
+    <h1 class="title">iOS7 study</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><a href="https://github.com/ericclemmons/grunt-angular-templates" target="_blank">grunt-angular-templates</a>
-模板文件会导致每次都去服务器请求..
-使用 grunt-angular-templates grunt build时 将模板文件转为js文件
-(html-&gt;stirng-&gt;$templateCache)
-再通过manifest作本地cache
-妥妥的..</p>
+        <p>最近在学习iOS7</p>
+<p>将以前的项目用iOS7重新写了一遍</p>
+<p>先列下用到的第三方库</p>
+<p>日后慢慢补充Blog</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -90,21 +88,20 @@
 7
 8
 9
-</pre></td><td class="code"><pre>ngtemplates:
-  dist:
-    options:
-      base: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
-      <span class="preprocessor"># concat: '&lt;%= yeoman.dist %&gt;/scripts/scripts.js'</span>
-      <span class="keyword">module</span>: yeomanConfig.name
-    cwd: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
-    src: <span class="comment">'views/**.html'</span>
-    dest: <span class="comment">'.tmp/scripts/templateCache.js'</span>
+10
+</pre></td><td class="code"><pre>platform <span class="symbol">:ios</span>, <span class="string">'7.0'</span>
+pod <span class="string">'BlocksKit'</span>, <span class="symbol">:git</span> =&gt; <span class="string">'https://github.com/pandamonia/BlocksKit.git'</span>, <span class="symbol">:branch</span> =&gt; <span class="string">'next'</span>
+pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.0'</span>
+pod <span class="string">'SDWebImage'</span>, <span class="string">'~&gt; 3.5.2'</span>
+pod <span class="string">'Mantle'</span>, <span class="string">'~&gt;1.3.1'</span>
+pod <span class="string">'FontAwesomeKit'</span>, <span class="string">'~&gt; 2.1.0'</span>
+pod <span class="string">'MSDynamicsDrawerViewController'</span>, <span class="string">'~&gt; 1.4.0'</span>
+pod <span class="string">'FFCircularProgressView'</span>, <span class="string">'~&gt; 0.3'</span>
+pod <span class="string">'SpinKit'</span>, <span class="string">'~&gt; 1.0.1'</span>
+pod <span class="string">'MZFormSheetController'</span>, <span class="string">'~&gt; 2.3.1'</span>
 </pre></td></tr></table></figure>
 
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/templateCache.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+<p>Have fun!</p>
 
       
     </div>
@@ -113,13 +110,13 @@
         
   
   <div class="categories">
-    <a href="/categories/web/">web</a>
+    <a href="/categories/iOS/">iOS</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/angularjs/">angularjs</a>
+    <a href="/tags/iOS/">iOS</a>
   </div>
 
         
@@ -162,7 +159,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2013/11/17/angular-grunt-ngtemplates/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2014/02/18/meizha/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
