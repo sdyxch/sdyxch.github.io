@@ -49,18 +49,6 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
   <div class="post-content">
     <header>
       
@@ -75,21 +63,19 @@
     </header>
     <div class="entry">
       
-        <h2 id="-">事出有因</h2>
+        <h2>事出有因</h2>
 <ul>
 <li>项目迭代</li>
 <li>使用angularjs 新版本(1.2.8)</li>
 <li>unit test 补充</li>
 </ul>
-<h2 id="-">必有果</h2>
+<h2>必有果</h2>
 <ul>
 <li>迭代完成</li>
 <li>更深入了解框架</li>
 </ul>
-<p><strong>注:</strong>
-以前在directive里使用isolate scope 发现 会isolate同一elm的其他directive
-新版本修复了这个问题</p>
-<h2 id="-">栗子</h2>
+<p><strong>注:</strong><br>以前在directive里使用isolate scope 发现 会isolate同一elm的其他directive<br>新版本修复了这个问题</p>
+<h2>栗子</h2>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -142,54 +128,54 @@
 50
 51
 52
-</pre></td><td class="code"><pre><span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.directives'</span>)
-  .directive <span class="string">'chatMain'</span>, [<span class="string">'$log'</span>, <span class="function"><span class="params">($log)</span> -&gt;</span>
-    <span class="attribute">restrict</span>: <span class="string">'E'</span>
-    <span class="attribute">replace</span>: <span class="literal">true</span>
-    <span class="attribute">templateUrl</span>: <span class="string">'views/chat.html'</span>
-    <span class="attribute">controller</span>: <span class="string">'ChatCtrl'</span>
-    <span class="attribute">require</span>: <span class="string">'^chatMain'</span>
-    <span class="attribute">link</span>: <span class="function"><span class="params">(scope, el, attrs, ctrl)</span> -&gt;</span>
-      <span class="comment">##</span>
+</pre></td><td class="code"><pre><span class="comment">'use strict'</span>
+angular.module(<span class="comment">'chat.directives')</span>
+  .directive <span class="comment">'chatMain', ['$log', ($log) -&gt;</span>
+    restrict: <span class="comment">'E'</span>
+    <span class="built_in">replace</span>: <span class="literal">true</span>
+    templateUrl: <span class="comment">'views/chat.html'</span>
+    controller: <span class="comment">'ChatCtrl'</span>
+    require: <span class="comment">'^chatMain'</span>
+    link: (scope, el, attrs, ctrl) -&gt;
+      ##
   ]
 
-<span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.controllers'</span>)
-  .controller <span class="string">'ChatCtrl'</span>, [
-    <span class="string">'$scope'</span>
-    <span class="function"><span class="params">($scope)</span> -&gt;</span>
+<span class="comment">'use strict'</span>
+angular.module(<span class="comment">'chat.controllers')</span>
+  .controller <span class="comment">'ChatCtrl', [</span>
+    <span class="comment">'$scope'</span>
+    ($scope) -&gt;
       ctrl = @
       $scope.current = <span class="literal">null</span>
 
-      <span class="property">@shouldFocus</span> = <span class="function"><span class="params">(customer)</span> -&gt;</span>
-        $scope.current <span class="keyword">is</span> customer <span class="keyword">and</span> customer <span class="keyword">isnt</span> <span class="literal">null</span>
+      @shouldFocus = (customer) -&gt;
+        $scope.current <span class="keyword">is</span> customer <span class="keyword">and</span> customer isnt <span class="literal">null</span>
 
-      <span class="property">@focus</span> = <span class="function"><span class="params">(customer)</span> -&gt;</span>
+      @focus = (customer) -&gt;
         $scope.current = customer
 
       ...
 
-      <span class="keyword">return</span>
+      return
   ]
 
-<span class="string">'use strict'</span>
-angular.<span class="built_in">module</span>(<span class="string">'chat.directives'</span>)
-  .directive <span class="string">'chatItem'</span>,
+<span class="comment">'use strict'</span>
+angular.module(<span class="comment">'chat.directives')</span>
+  .directive <span class="comment">'chatItem',</span>
     [
-      <span class="function"><span class="params">()</span> -&gt;</span>
-        <span class="attribute">restrict</span>: <span class="string">'E'</span>
-        <span class="attribute">replace</span>: <span class="literal">true</span>
-        <span class="attribute">scope</span>:
-          <span class="attribute">customer</span>: <span class="string">'='</span>
-        <span class="attribute">require</span>: <span class="string">'^chatMain'</span>
-        <span class="attribute">templateUrl</span>: <span class="string">'views/chat.item.html'</span>
-        <span class="attribute">link</span>: <span class="function"><span class="params">(scope, el, attrs, ctrl)</span> -&gt;</span>
-          scope.<span class="function"><span class="title">shouldFocus</span> = <span class="params">(customer)</span> -&gt;</span>
+      () -&gt;
+        restrict: <span class="comment">'E'</span>
+        <span class="built_in">replace</span>: <span class="literal">true</span>
+        scope:
+          customer: <span class="comment">'='</span>
+        require: <span class="comment">'^chatMain'</span>
+        templateUrl: <span class="comment">'views/chat.item.html'</span>
+        link: (scope, el, attrs, ctrl) -&gt;
+          scope.shouldFocus = (customer) -&gt;
             ctrl.shouldFocus customer
 
-          scope.<span class="function"><span class="title">focus</span> = <span class="params">(customer)</span> -&gt;</span>
-            el.addClass <span class="string">'active'</span>
+          scope.focus = (customer) -&gt;
+            el.addClass <span class="comment">'active'</span>
             ctrl.focus customer
 
           ...
@@ -226,40 +212,40 @@ angular.<span class="built_in">module</span>(<span class="string">'chat.directiv
 28
 29
 </pre></td><td class="code"><pre><span class="string">'use strict'</span>
-describe <span class="string">'Unit testing for chatItem directive'</span>, <span class="function"><span class="params">()</span> -&gt;</span>
-  scope = elm = mainCtrl = <span class="literal">null</span>
-  beforeEach<span class="function"> -&gt;</span>
-    <span class="built_in">module</span> <span class="string">'views/chat.item.html'</span>
-    <span class="built_in">module</span> <span class="string">'ChatWebClient'</span>, <span class="function"><span class="params">($provide)</span> -&gt;</span>
-      <span class="literal">null</span>
-    inject <span class="function"><span class="params">($compile, $rootScope)</span> -&gt;</span>
-      scope = $rootScope.$<span class="keyword">new</span>()
-      scope.customer =
-        <span class="attribute">username</span>: <span class="string">'customer1'</span>
-        <span class="attribute">id</span>: <span class="string">'customer1'</span>
+describe <span class="string">'Unit testing for chatItem directive'</span>, () -&gt;
+  scope = elm = mainCtrl = null
+  beforeEach -&gt;
+    module <span class="string">'views/chat.item.html'</span>
+    module <span class="string">'ChatWebClient'</span>, ($provide) -&gt;
+      null
+    inject ($compile, $rootScope) -&gt;
+      scope = $<span class="transposed_variable">rootScope.</span>$new()
+      <span class="transposed_variable">scope.</span>customer =
+        username: <span class="string">'customer1'</span>
+        id: <span class="string">'customer1'</span>
       elm = $compile(<span class="string">'&lt;chat-item customer="customer"&gt;&lt;/chat-item&gt;'</span>)(scope)
       mainCtrl =
-        <span class="attribute">shouldFocus</span>: sinon.spy()
-        <span class="attribute">focus</span>: sinon.spy()
-      elm.data <span class="string">'$chatMainController'</span>, mainCtrl
-      scope.$digest()
+        shouldFocus: <span class="transposed_variable">sinon.</span>spy()
+        focus: <span class="transposed_variable">sinon.</span>spy()
+      <span class="transposed_variable">elm.</span>data <span class="string">'$chatMainController'</span>, mainCtrl
+      <span class="transposed_variable">scope.</span>$digest()
 
-  it <span class="string">'when call shouldFocus then ctrl shouldFocus should been called'</span>,<span class="function"> -&gt;</span>
-    elm.isolateScope().shouldFocus <span class="string">'xx'</span>
-    mainCtrl.shouldFocus.should.have.been.calledWith <span class="string">'xx'</span>
+  it <span class="string">'when call shouldFocus then ctrl shouldFocus should been called'</span>, -&gt;
+    <span class="transposed_variable">elm.</span>isolateScope().shouldFocus <span class="string">'xx'</span>
+    <span class="transposed_variable">mainCtrl.</span><span class="transposed_variable">shouldFocus.</span><span class="transposed_variable">should.</span><span class="transposed_variable">have.</span><span class="transposed_variable">been.</span>calledWith <span class="string">'xx'</span>
 
-  it <span class="string">'when call focus then ctrl focus should been called and el should have class active'</span>,<span class="function"> -&gt;</span>
-    elm.isolateScope().focus <span class="string">'xx'</span>
-    mainCtrl.focus.should.have.been.calledWith <span class="string">'xx'</span>
-    elm.hasClass(<span class="string">'active'</span>).should.have.been.<span class="literal">true</span>
+  it <span class="string">'when call focus then ctrl focus should been called and el should have class active'</span>, -&gt;
+    <span class="transposed_variable">elm.</span>isolateScope().focus <span class="string">'xx'</span>
+    <span class="transposed_variable">mainCtrl.</span><span class="transposed_variable">focus.</span><span class="transposed_variable">should.</span><span class="transposed_variable">have.</span><span class="transposed_variable">been.</span>calledWith <span class="string">'xx'</span>
+    <span class="transposed_variable">elm.</span>hasClass(<span class="string">'active'</span>).<span class="transposed_variable">should.</span><span class="transposed_variable">have.</span><span class="transposed_variable">been.</span>true
 
   ...
 </pre></td></tr></table></figure>
 
-<h2 id="-">然后..</h2>
-<h3 id="isolate-scope">isolate scope</h3>
+<h2>然后..</h2>
+<h3>isolate scope</h3>
 <p>通过新版本 可以通过 elm.isolateScope() 获取 directive isolate scope</p>
-<h4 id="scope-isolatescope">scope 与 isolateScope</h4>
+<h4>scope 与 isolateScope</h4>
 <p>angular源码(1.2.8):</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
@@ -356,34 +342,34 @@ describe <span class="string">'Unit testing for chatItem directive'</span>, <spa
 }
 
 Scope.prototype = {
-  <span class="variable">$new</span>: <span class="function"><span class="keyword">function</span><span class="params">(isolate)</span> {</span>
+  <span class="variable">$new</span>: function(isolate) {
     <span class="keyword">var</span> Child,
         child;
 
     <span class="keyword">if</span> (isolate) {
       child = <span class="keyword">new</span> Scope();
-      child.<span class="variable">$root</span> = this.<span class="variable">$root</span>;
+      child.<span class="variable">$root</span> = <span class="keyword">this</span>.<span class="variable">$root</span>;
       <span class="comment">// ensure that there is just one async queue per $rootScope and its children</span>
-      child.<span class="variable">$$asyncQueue</span> = this.<span class="variable">$$asyncQueue</span>;
-      child.<span class="variable">$$postDigestQueue</span> = this.<span class="variable">$$postDigestQueue</span>;
+      child.<span class="variable">$$asyncQueue</span> = <span class="keyword">this</span>.<span class="variable">$$asyncQueue</span>;
+      child.<span class="variable">$$postDigestQueue</span> = <span class="keyword">this</span>.<span class="variable">$$postDigestQueue</span>;
     } <span class="keyword">else</span> {
-      Child = <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>}; <span class="comment">// should be anonymous; This is so that when the minifier munges</span>
+      Child = function() {}; <span class="comment">// should be anonymous; This is so that when the minifier munges</span>
         <span class="comment">// the name it does not become random set of chars. This will then show up as class</span>
         <span class="comment">// name in the debugger.</span>
-      Child.prototype = this;
+      Child.prototype = <span class="keyword">this</span>;
       child = <span class="keyword">new</span> Child();
       child.<span class="variable">$id</span> = nextUid();
     }
     child[<span class="string">'this'</span>] = child;
     child.<span class="variable">$$listeners</span> = {};
-    child.<span class="variable">$parent</span> = this;
+    child.<span class="variable">$parent</span> = <span class="keyword">this</span>;
     child.<span class="variable">$$watchers</span> = child.<span class="variable">$$nextSibling</span> = child.<span class="variable">$$childHead</span> = child.<span class="variable">$$childTail</span> = <span class="keyword">null</span>;
-    child.<span class="variable">$$prevSibling</span> = this.<span class="variable">$$childTail</span>;
-    <span class="keyword">if</span> (this.<span class="variable">$$childHead</span>) {
-      this.<span class="variable">$$childTail</span>.<span class="variable">$$nextSibling</span> = child;
-      this.<span class="variable">$$childTail</span> = child;
+    child.<span class="variable">$$prevSibling</span> = <span class="keyword">this</span>.<span class="variable">$$childTail</span>;
+    <span class="keyword">if</span> (<span class="keyword">this</span>.<span class="variable">$$childHead</span>) {
+      <span class="keyword">this</span>.<span class="variable">$$childTail</span>.<span class="variable">$$nextSibling</span> = child;
+      <span class="keyword">this</span>.<span class="variable">$$childTail</span> = child;
     } <span class="keyword">else</span> {
-      this.<span class="variable">$$childHead</span> = this.<span class="variable">$$childTail</span> = child;
+      <span class="keyword">this</span>.<span class="variable">$$childHead</span> = <span class="keyword">this</span>.<span class="variable">$$childTail</span> = child;
     }
     <span class="keyword">return</span> child;
   },
@@ -391,19 +377,9 @@ Scope.prototype = {
   ...
 </pre></td></tr></table></figure>
 
-<p>可见:</p>
-<ul>
-<li><strong>如果directive scope: false</strong> 不会创建新的scope</li>
-<li><strong>如果directive scope: ture</strong> 创建一个继承自parent的scope</li>
-<li><strong>如果directive scope: {...}</strong> 创建一个继承自parent的scope
-同时创建一个新的scope 赋值给 $isolateScope(or $isolateScopeNoTemplate)
-<a href="https://github.com/angular/angular.js/commit/909cabd36d779598763cc358979ecd85bb40d4d7" target="_blank">以前版本中  isolate scope 会直接 child = new Scope(true)</a></li>
-</ul>
-<p>另外:</p>
-<ul>
-<li>无论scope取值为何，都可以通过scope.$parent 在link中访问到parent scope</li>
-</ul>
-<h4 id="new-scope">new scope</h4>
+<p>可见:<br>- <strong>如果directive scope: false</strong> 不会创建新的scope<br>- <strong>如果directive scope: ture</strong> 创建一个继承自parent的scope<br>- <strong>如果directive scope: {…}</strong> 创建一个继承自parent的scope<br>  同时创建一个新的scope 赋值给 $isolateScope(or $isolateScopeNoTemplate)<br><a href="https://github.com/angular/angular.js/commit/909cabd36d779598763cc358979ecd85bb40d4d7" target="_blank">以前版本中  isolate scope 会直接 child = new Scope(true)</a></p>
+<p>另外:<br>- 无论scope取值为何，都可以通过scope.$parent 在link中访问到parent scope</p>
+<h4>new scope</h4>
 <p>遇到过在ngRepeat里 2-way data binding ngModel 结果 $setViewValue不起作用</p>
 <p>angular源码(1.2.8) ngRepeat:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -428,32 +404,31 @@ Scope.prototype = {
 20
 21
 22
-</pre></td><td class="code"><pre><span class="keyword">if</span> (block.scope) {
+</pre></td><td class="code"><pre><span class="keyword">if</span> (<span class="keyword">block</span>.scope) {
   <span class="comment">// if we have already seen this object, then we need to reuse the</span>
   <span class="comment">// associated scope/element</span>
-  childScope = block.scope;
+  childScope = <span class="keyword">block</span>.scope;
 
   nextNode = previousNode;
   <span class="keyword">do</span> {
     nextNode = nextNode.nextSibling;
   } <span class="keyword">while</span>(nextNode && nextNode[NG_REMOVED]);
 
-  <span class="keyword">if</span> (getBlockStart(block) != nextNode) {
+  <span class="keyword">if</span> (getBlockStart(<span class="keyword">block</span>) != nextNode) {
     <span class="comment">// existing item which got moved</span>
-    <span class="variable">$animate</span>.move(getBlockElements(block.<span class="keyword">clone</span>), <span class="keyword">null</span>, jqLite(previousNode));
+    $animate.move(getBlockElements(<span class="keyword">block</span>.clone), null, jqLite(previousNode));
   }
-  previousNode = getBlockEnd(block);
+  previousNode = getBlockEnd(<span class="keyword">block</span>);
   } <span class="keyword">else</span> {
     <span class="comment">// new item which we don't know about</span>
-    childScope = <span class="variable">$scope</span>.<span class="variable">$new</span>();
+    childScope = $scope.$new();
   }
   childScope[valueIdentifier] = value;
   ...
 }
 </pre></td></tr></table></figure>
 
-<p>可以看到在ngRepeat中 创建了新的继承子parent scope的 childScope = $scope.$new();
-由于javascript 原始数据类型的特征  无法实现双向绑定</p>
+<p>可以看到在ngRepeat中 创建了新的继承子parent scope的 childScope = $scope.$new();<br>由于javascript 原始数据类型的特征  无法实现双向绑定</p>
 <p><a href="https://github.com/angular/angular.js/wiki/Understanding-Scopes" target="_blank">参考wiki:</a></p>
 <p>until you try 2-way data binding (i.e., form elements, ng-model) to a primitive (e.g., number, string, boolean) defined on the parent scope from inside the child scope. It doesn&#39;t work the way most people expect it should work. What happens is that the child scope gets its own property that hides/shadows the parent property of the same name. This is not something AngularJS is doing – this is how JavaScript prototypal inheritance works. New AngularJS developers often do not realize that ng-repeat, ng-switch, ng-view and ng-include all create new child scopes, so the problem often shows up when these directives are involved.</p>
 <p>If you really want/need to use a primitive, there are two workarounds:</p>
@@ -473,20 +448,20 @@ Scope.prototype = {
 8
 9
 10
-</pre></td><td class="code"><pre><span class="keyword">if</span> (!transcludedScope) {
-  transcludedScope = scope.<span class="variable">$new</span>();
-  transcludedScope.<span class="variable">$$transcluded</span> = <span class="keyword">true</span>;
-  scopeCreated = <span class="keyword">true</span>;
+</pre></td><td class="code"><pre><span class="function"><span class="title">if</span> <span class="params">(!transcluded<span class="variable">Scope</span>)</span> {
+  <span class="title">transcludedScope</span> = <span class="title">scope</span>.$<span class="title">new</span><span class="params">()</span>;
+  <span class="title">transcludedScope</span>.$$<span class="title">transcluded</span> = <span class="title">true</span>;
+  <span class="title">scopeCreated</span> = <span class="title">true</span>;
 }
 
-<span class="keyword">var</span> <span class="keyword">clone</span> = transcludeFn(transcludedScope, cloneFn, controllers);
-<span class="keyword">if</span> (scopeCreated) {
-  <span class="keyword">clone</span>.on(<span class="string">'$destroy'</span>, bind(transcludedScope, transcludedScope.<span class="variable">$destroy</span>));
+<span class="title">var</span> <span class="title">clone</span> = <span class="title">transcludeFn</span><span class="params">(transcluded<span class="variable">Scope</span>, clone<span class="variable">Fn</span>, controllers)</span>;
+<span class="title">if</span> <span class="params">(scope<span class="variable">Created</span>)</span> {
+  <span class="title">clone</span>.<span class="title">on</span><span class="params">('$destroy', <span class="function_name">bind</span>(transcluded<span class="variable">Scope</span>, transcluded<span class="variable">Scope</span>.$destroy))</span>;
 }
 </pre></td></tr></table></figure>
 
 <p>transcludedScope 和 directive scope是兄弟关系 都继承自 parent scope</p>
-<h4 id="-">遇到的问题:</h4>
+<h4>遇到的问题:</h4>
 <p>使用angular-bootstrap modal</p>
 <p><a href="https://github.com/angular-ui/bootstrap/blob/master/template/modal/window.html" target="_blank">angular-ui/bootstrap/template/modal/window.html</a>:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -497,18 +472,17 @@ Scope.prototype = {
 6
 7
 8
-</pre></td><td class="code"><pre>&lt;<span class="keyword">div</span> tabindex=<span class="string">"-1"</span> <span class="type">class</span>=<span class="string">"modal fade "</span>
-  ng-<span class="type">class</span>=<span class="string">"{in: animate}"</span>
-  ng-style=<span class="string">"{'z-index': 1050 + index*10, display: 'block'}"</span>
-  ng-click=<span class="string">"close($event)"</span>&gt;
-    &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"modal-dialog"</span>&gt;
-      &lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"modal-content"</span> ng-transclude&gt;&lt;/<span class="keyword">div</span>&gt;
-    &lt;/<span class="keyword">div</span>&gt;
-&lt;/<span class="keyword">div</span>&gt;
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">div</span> <span class="attribute">tabindex</span>=<span class="value">"-1"</span> <span class="attribute">class</span>=<span class="value">"modal fade "</span>
+  <span class="attribute">ng-class</span>=<span class="value">"{in: animate}"</span>
+  <span class="attribute">ng-style</span>=<span class="value">"{'z-index': 1050 + index*10, display: 'block'}"</span>
+  <span class="attribute">ng-click</span>=<span class="value">"close($event)"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"modal-dialog"</span>&gt;</span>
+      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"modal-content"</span> <span class="attribute">ng-transclude</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<p>在modalCtl 定义 $scope.message = &#39;hello world&#39;
-modal模板中</p>
+<p>在modalCtl 定义 $scope.message = ‘hello world’<br>modal模板中</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -519,28 +493,28 @@ modal模板中</p>
 
 <p>同样因为message是字符串类型 出现了问题 修改为:</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="subst">&lt;</span>textarea class<span class="subst">=</span><span class="string">"chat"</span> ng<span class="attribute">-model</span><span class="subst">=</span><span class="string">"$parent.message"</span> <span class="keyword">rows</span><span class="subst">=</span><span class="string">"8"</span> ng<span class="attribute">-enter</span><span class="subst">=</span><span class="string">"broadcast()"</span><span class="subst">&gt;&lt;</span>/textarea<span class="subst">&gt;</span>
+</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">textarea</span> <span class="attribute">class</span>=<span class="value">"chat"</span> <span class="attribute">ng-model</span>=<span class="value">"$parent.message"</span> <span class="attribute">rows</span>=<span class="value">"8"</span> <span class="attribute">ng-enter</span>=<span class="value">"broadcast()"</span>&gt;</span><span class="tag">&lt;/<span class="title">textarea</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="test-require-other-directive-s-">test require other directive(s)</h3>
+<h3>test require other directive(s)</h3>
 <p>两种方法:</p>
-<h4 id="-template-direcitve">构建template 包含两个direcitve</h4>
+<h4>构建template 包含两个direcitve</h4>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
 5
 6
-</pre></td><td class="code"><pre>chatMainElm = $compile(<span class="comment">'<span class="xmlDocTag">&lt;chat-main&gt;</span><span class="xmlDocTag">&lt;/chat-main&gt;</span>')(scope)</span>
-chatMainCtrl = chatMainElm.controller(<span class="comment">'chatMain')</span>
-sinon.stub chatMainCtrl, <span class="comment">'blur'</span>
-chatItemElm = angular.element <span class="comment">'<span class="xmlDocTag">&lt;chat-item&gt;</span><span class="xmlDocTag">&lt;/chat-item&gt;</span>'</span>
+</pre></td><td class="code"><pre><span class="xml">chatMainElm = </span><span class="variable">$compile</span><span class="xml">('<span class="tag">&lt;<span class="title">chat-main</span>&gt;</span><span class="tag">&lt;/<span class="title">chat-main</span>&gt;</span>')(scope)
+chatMainCtrl = chatMainElm.controller('chatMain')
+sinon.stub chatMainCtrl, 'blur'
+chatItemElm = angular.element '<span class="tag">&lt;<span class="title">chat-item</span>&gt;</span><span class="tag">&lt;/<span class="title">chat-item</span>&gt;</span>'
 chatMainElm.append chatItemElm
-chatItemElm = $compile(chatItemElm)(scope)
+chatItemElm = </span><span class="variable">$compile</span><span class="xml">(chatItemElm)(scope)</span>
 </pre></td></tr></table></figure>
 
-<h4 id="mock-a-ctrl-">mock a ctrl (比较喜欢这种)</h4>
-<p><strong>elm.data &#39;$ + directive name + Controller&#39;</strong></p>
+<h4>mock a ctrl (比较喜欢这种)</h4>
+<p><strong>elm.data ‘$ + directive name + Controller’</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -548,11 +522,11 @@ chatItemElm = $compile(chatItemElm)(scope)
 5
 6
 </pre></td><td class="code"><pre>mainCtrl =
-  shouldFocus: <span class="filename">sinon.spy()
-  blur</span>: <span class="filename">sinon.spy()
-  focus</span>: <span class="filename">sinon.spy()
-  closeChat</span>: <span class="filename">sinon.spy()
-elm.data '$chatMainController', mainCtrl</span>
+  shouldFocus: <span class="transposed_variable">sinon.</span>spy()
+  blur: <span class="transposed_variable">sinon.</span>spy()
+  focus: <span class="transposed_variable">sinon.</span>spy()
+  closeChat: <span class="transposed_variable">sinon.</span>spy()
+<span class="transposed_variable">elm.</span>data <span class="string">'$chatMainController'</span>, mainCtrl
 </pre></td></tr></table></figure>
 
 <p>Have Fun!</p>
@@ -631,7 +605,7 @@ elm.data '$chatMainController', mainCtrl</span>
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>3</small></li>
+    <li><a href="/categories/blog/">blog</a><small>4</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -661,6 +635,8 @@ elm.data '$chatMainController', mainCtrl</span>
     <li><a href="/tags/karma/">karma</a><small>1</small></li>
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>1</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

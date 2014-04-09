@@ -49,18 +49,6 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
   <div class="post-content">
     <header>
       
@@ -75,10 +63,8 @@
     </header>
     <div class="entry">
       
-        <p>有个angular e2e test 的框架 Protractor 基于WebDriverJS 很火..但是没用过..
- 我理解的e2e test 就是功能 行为 表现 场景 (性能)..
- angular 封装了很多用来e2e测试的工具方法</p>
-<h3 id="sample">sample</h3>
+        <p>有个angular e2e test 的框架 Protractor 基于WebDriverJS 很火..但是没用过..<br> 我理解的e2e test 就是功能 行为 表现 场景 (性能)..<br> angular 封装了很多用来e2e测试的工具方法</p>
+<h3>sample</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -88,28 +74,28 @@
 7
 8
 9
-</pre></td><td class="code"><pre> <span class="keyword">it</span> <span class="string">'when signin failed then will stay on this page '</span>, -&gt;
-    browser().navigateTo <span class="string">'/'</span>
+</pre></td><td class="code"><pre> it <span class="attribute">'when</span> signin failed <span class="keyword">then</span> will stay <span class="keyword">on</span> this page ', -&gt;
+    browser().navigateTo '/'
     pause()
-    keyboard().keydown <span class="constant">null</span>, <span class="string">'keydown'</span>, <span class="number">13</span>, <span class="constant">false</span>, <span class="constant">false</span>
-    input(<span class="string">'name'</span>).enter(<span class="string">'csr1'</span>)
-    input(<span class="string">'password'</span>).enter(<span class="string">'csr3'</span>)
-    <span class="keyword">element</span>(<span class="string">'button[type="submit"]'</span>).click()
-    expect(browser().location().path()).toBe(<span class="string">'/signin'</span>)
-    <span class="comment"># pause()</span>
+    keyboard().keydown <span class="keyword">null</span>, <span class="attribute">'keydown</span>', <span class="number">13</span>, false, false
+    input(<span class="attribute">'name</span>').enter(<span class="attribute">'csr1</span>')
+    input(<span class="attribute">'password</span>').enter(<span class="attribute">'csr3</span>')
+    element(<span class="attribute">'button</span>[<span class="keyword">type</span>=<span class="string">"submit"</span>]').click()
+    expect(browser().location().path()).toBe('/signin')
+    # pause()
 </pre></td></tr></table></figure>
 
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
 4
-</pre></td><td class="code"><pre><span class="keyword">it</span> <span class="string">'when click the side customer then will show a chat window'</span>, -&gt;
-    <span class="keyword">element</span>(<span class="string">'.side-main ul li.customer:eq(0)'</span>).click()
-    expect(repeater(<span class="string">'.chat-box'</span>).count()).toBe(<span class="number">1</span>)
+</pre></td><td class="code"><pre><span class="keyword">it</span> 'when click <span class="keyword">the</span> side customer <span class="keyword">then</span> will show a chat window', -&gt;
+    element('.side-main ul li.customer:eq(<span class="number">0</span>)').click()
+    expect(repeater('.chat-box').<span class="command">count</span>()).toBe(<span class="number">1</span>)
     <span class="comment"># pause()</span>
 </pre></td></tr></table></figure>
 
-<h3 id="-httpbackend-in-e2e-test">$httpBackend in e2e test</h3>
+<h3>$httpBackend in e2e test</h3>
 <ul>
 <li>including angular-mocks.js in the index.html</li>
 </ul>
@@ -181,7 +167,7 @@ angular.module(<span class="string">'ChatWebClient'</span>).requires.push <span 
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/mocks.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3 id="extending-the-scenario-dsl">extending the scenario dsl</h3>
+<h3>extending the scenario dsl</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -202,25 +188,25 @@ angular.module(<span class="string">'ChatWebClient'</span>).requires.push <span 
 18
 19
 20
-</pre></td><td class="code"><pre>angular.scenario.dsl <span class="string">'keyboard'</span>,<span class="function"> -&gt;</span>
+</pre></td><td class="code"><pre>angular.scenario.dsl <span class="string">'keyboard'</span>, -&gt;
   chain  = {}
-  chain.<span class="function"><span class="title">keydown</span> = <span class="params">(selector, keyEvent, keyCode, shift, ctrl)</span> -&gt;</span>
-    <span class="keyword">this</span>.addFutureAction <span class="string">'keyEvent'</span>, <span class="function"><span class="params">($<span class="built_in">window</span>, $<span class="built_in">document</span>, done)</span> -&gt;</span>
-      jQuery = $<span class="built_in">window</span>.$
+  chain.keydown = (selector, keyEvent, keyCode, <span class="keyword">shift</span>, ctrl) -&gt;
+    this.addFutureAction <span class="string">'keyEvent'</span>, (<span class="variable">$window</span>, <span class="variable">$document</span>, done) -&gt;
+      jQuery = <span class="variable">$window</span>.$
       e = jQuery.Event(keyEvent)
       e.which = keyCode <span class="comment"># Some key code value</span>
-      e.altKey = <span class="literal">false</span>
+      e.altKey = false
       e.ctrlKey = ctrl
-      e.shiftKey = shift
-      <span class="keyword">if</span> selector <span class="keyword">is</span> <span class="literal">null</span>
+      e.shiftKey = <span class="keyword">shift</span>
+      <span class="keyword">if</span> selector is null
         selector = <span class="string">'*:focus'</span>
       j = jQuery(selector)
-      <span class="keyword">if</span> j <span class="keyword">is</span> <span class="literal">null</span>
+      <span class="keyword">if</span> j is null
         j = jQuery(<span class="string">'body'</span>)
       j.trigger(e)
       done()
 
-  <span class="keyword">return</span> <span class="function"><span class="params">()</span> -&gt;</span>
+  <span class="keyword">return</span> () -&gt;
     chain
 </pre></td></tr></table></figure>
 
@@ -300,7 +286,7 @@ angular.module(<span class="string">'ChatWebClient'</span>).requires.push <span 
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>3</small></li>
+    <li><a href="/categories/blog/">blog</a><small>4</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -330,6 +316,8 @@ angular.module(<span class="string">'ChatWebClient'</span>).requires.push <span 
     <li><a href="/tags/karma/">karma</a><small>1</small></li>
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>1</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

@@ -49,18 +49,6 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
   <div class="post-content">
     <header>
       
@@ -75,10 +63,8 @@
     </header>
     <div class="entry">
       
-        <h3 id="mock-a-socket-service-for-unit-test">mock a socket service for unit test</h3>
-<p>就像httpbackend一样 我们不希望 对于socket的相关测试 会影响到真实的项目
-所以同样采用mock socket 代替真实socket service
-angular中 service 采用后注册替代之前注册的原则</p>
+        <h3>mock a socket service for unit test</h3>
+<p>就像httpbackend一样 我们不希望 对于socket的相关测试 会影响到真实的项目<br>所以同样采用mock socket 代替真实socket service<br>angular中 service 采用后注册替代之前注册的原则</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -95,19 +81,19 @@ angular中 service 采用后注册替代之前注册的原则</p>
 14
 15
 16
-</pre></td><td class="code"><pre>angular.<span class="built_in">module</span>(<span class="string">'ChatWebClient'</span>)
+</pre></td><td class="code"><pre>angular.module(<span class="string">'ChatWebClient'</span>)
   .factory <span class="string">'Socket'</span>, [
     <span class="string">'$rootScope'</span>
-    <span class="function"><span class="params">($rootScope)</span> -&gt;</span>
-      <span class="attribute">events</span>: {}
-      <span class="attribute">instance</span>: sinon.spy<span class="function"> -&gt;</span>
+    (<span class="variable">$rootScope</span>) -&gt;
+      events: {}
+      instance: sinon.spy -&gt;
         <span class="comment">##</span>
-      <span class="attribute">on</span>: sinon.spy <span class="function"><span class="params">(eventName, callback)</span> -&gt;</span>
-        <span class="property">@events</span>[eventName] = [] <span class="keyword">unless</span> <span class="property">@events</span>[eventName]
-        <span class="property">@events</span>[eventName].push callback
-      <span class="attribute">emit</span>: sinon.spy <span class="function"><span class="params">(eventName, data, emitCallback)</span> -&gt;</span>
-        _.each <span class="property">@events</span>[eventName], <span class="function"><span class="params">(callback)</span> -&gt;</span>
-          $rootScope.$apply<span class="function"> -&gt;</span>
+      on: sinon.spy (eventName, callback) -&gt;
+        <span class="variable">@events</span>[eventName] = [] <span class="keyword">unless</span> <span class="variable">@events</span>[eventName]
+        <span class="variable">@events</span>[eventName].<span class="keyword">push</span> callback
+      emit: sinon.spy (eventName, data, emitCallback) -&gt;
+        <span class="number">_</span>.<span class="keyword">each</span> <span class="variable">@events</span>[eventName], (callback) -&gt;
+          <span class="variable">$rootScope</span>.<span class="variable">$apply</span> -&gt;
             callback data
         emitCallback?()
     ]
@@ -152,11 +138,11 @@ it <span class="string">'when the socket disconnect, then app will send a notifi
 it <span class="string">'when the socket error, then app will send a notification to show this situation'</span>, -&gt;
   socketMock.emit <span class="string">'error'</span>
   notifierMock.<span class="keyword">send</span>.should.have.been.called
-<span class="string">`</span>
+<span class="string">`
 </pre></td></tr></table></figure>
 
 <p><strong><code>这种通过注册mock service的方法  看到被应用在unit controller test中 没有深入的研究 也mark下</code></strong></p>
-<h3 id="-timeout-rootscope-broadcast">$timeout $rootscope.$broadcast</h3>
+<h3>$timeout $rootscope.$broadcast</h3>
 <ul>
 <li>angularjs 1.2中可以直接使用$timeout.flush()</li>
 </ul>
@@ -182,11 +168,11 @@ it <span class="string">'when the socket error, then app will send a notificatio
 3
 4
 5
-</pre></td><td class="code"><pre>it <span class="string">'when the notification then rootscope will broadcast a message'</span>, inject (<span class="variable">$rootScope</span>) -&gt;
-  sinon.spy <span class="variable">$rootScope</span>, <span class="string">'$broadcast'</span>
-  res = notifier.<span class="keyword">send</span> {}
-  <span class="variable">$broadcast</span>.should.have.been.calledWith <span class="string">'notifier.newNotification'</span>
-  <span class="variable">$rootScope</span>.<span class="variable">$broadcast</span>.restore()
+</pre></td><td class="code"><pre>it <span class="string">'when the notification then rootscope will broadcast a message'</span>, inject ($rootScope) -&gt;
+  <span class="transposed_variable">sinon.</span>spy $rootScope, <span class="string">'$broadcast'</span>
+  res = <span class="transposed_variable">notifier.</span>send <span class="cell">{}</span>
+  $<span class="transposed_variable">broadcast.</span><span class="transposed_variable">should.</span><span class="transposed_variable">have.</span><span class="transposed_variable">been.</span>calledWith <span class="string">'notifier.newNotification'</span>
+  $<span class="transposed_variable">rootScope.</span>$<span class="transposed_variable">broadcast.</span>restore()
 </pre></td></tr></table></figure>
 
 <p>Have fun!</p>
@@ -265,7 +251,7 @@ it <span class="string">'when the socket error, then app will send a notificatio
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>3</small></li>
+    <li><a href="/categories/blog/">blog</a><small>4</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -295,6 +281,8 @@ it <span class="string">'when the socket error, then app will send a notificatio
     <li><a href="/tags/karma/">karma</a><small>1</small></li>
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>1</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

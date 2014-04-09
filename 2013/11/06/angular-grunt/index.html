@@ -49,18 +49,6 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
   <div class="post-content">
     <header>
       
@@ -75,7 +63,7 @@
     </header>
     <div class="entry">
       
-        <h3 id="grunt-">grunt配置</h3>
+        <h3>grunt配置</h3>
 <ul>
 <li>grunt stylus</li>
 </ul>
@@ -86,19 +74,17 @@
 5
 6
 7
-</pre></td><td class="code"><pre>stylus:
-  compile:
-    options:
-      <span class="built_in">compress</span>: <span class="constant">true</span>
-      paths: [<span class="string">'node_modules/grunt-contrib-stylus/node_modules'</span>]
-    <span class="built_in">files</span>:
+</pre></td><td class="code"><pre><span class="method">stylus:</span>
+  <span class="method">compile:</span>
+    <span class="method">options:</span>
+      <span class="method">compress:</span> <span class="keyword">true</span>
+      <span class="method">paths:</span> [<span class="string">'node_modules/grunt-contrib-stylus/node_modules'</span>]
+    <span class="method">files:</span>
       <span class="string">'app/styles/site.css'</span>: <span class="string">'app/styles/site.styl'</span>
 </pre></td></tr></table></figure>
 
 <ul>
-<li>grunt htmlmin
-2级目录下的html file不会自动 use min
-修改如下:</li>
+<li>grunt htmlmin<br>2级目录下的html file不会自动 use min<br>修改如下:</li>
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
@@ -112,17 +98,17 @@
 10
 11
 12
-</pre></td><td class="code"><pre>htmlmin:
-  dist:
-    options: {}
-    <span class="built_in">files</span>: [
-      expand: <span class="constant">true</span>
-      cwd: <span class="string">"&lt;%= yeoman.app %&gt;"</span>
-      src: [
-        <span class="string">"*.html"</span>
-        <span class="string">"views/*.html"</span>
+</pre></td><td class="code"><pre><span class="method">htmlmin:</span>
+  <span class="method">dist:</span>
+    <span class="method">options:</span> {}
+    <span class="method">files:</span> [
+      <span class="method">expand:</span> <span class="keyword">true</span>
+      <span class="method">cwd:</span> <span class="comment">"&lt;%= yeoman.app %&gt;"</span>
+      <span class="method">src:</span> [
+        <span class="comment">"*.html"</span>
+        <span class="comment">"views/*.html"</span>
       ]
-      dest: <span class="string">"&lt;%= yeoman.dist %&gt;"</span>
+      <span class="method">dest:</span> <span class="comment">"&lt;%= yeoman.dist %&gt;"</span>
     ]
 </pre></td></tr></table></figure>
 
@@ -145,22 +131,22 @@
 14
 15
 16
-</pre></td><td class="code"><pre>manifest:
-  generate:
-    options:
-      basePath: <span class="string">'dist/'</span>
-      preferOnline: <span class="literal">true</span>
-      verbose: <span class="literal">true</span>
-      timestamp: <span class="literal">true</span>
-      <span class="built_in">hash</span>: <span class="literal">true</span>
-      master: [<span class="string">'index.html'</span>]
-    src: [
+</pre></td><td class="code"><pre><span class="method">manifest:</span>
+  <span class="method">generate:</span>
+    <span class="method">options:</span>
+      <span class="method">basePath:</span> <span class="string">'dist/'</span>
+      <span class="method">preferOnline:</span> <span class="keyword">true</span>
+      <span class="method">verbose:</span> <span class="keyword">true</span>
+      <span class="method">timestamp:</span> <span class="keyword">true</span>
+      <span class="method">hash:</span> <span class="keyword">true</span>
+      <span class="method">master:</span> [<span class="string">'index.html'</span>]
+    <span class="method">src:</span> [
       <span class="string">'scripts/*.js'</span>
       <span class="string">'styles/*.css'</span>
       <span class="string">'images/*'</span>
       <span class="string">'fonts/*'</span>
     ]
-    dest: <span class="string">'dist/appcache.manifest'</span>
+    <span class="method">dest:</span> <span class="string">'dist/appcache.manifest'</span>
 </pre></td></tr></table></figure>
 
 <p>Have fun!</p>
@@ -239,7 +225,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>3</small></li>
+    <li><a href="/categories/blog/">blog</a><small>4</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -269,6 +255,8 @@
     <li><a href="/tags/karma/">karma</a><small>1</small></li>
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>1</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

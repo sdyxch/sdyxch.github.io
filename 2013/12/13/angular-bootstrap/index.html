@@ -49,18 +49,6 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
   <div class="post-content">
     <header>
       
@@ -75,18 +63,12 @@
     </header>
     <div class="entry">
       
-        <p>angular-ui bootstrap 对 bootstrap 3.0版本支持不是很好
-由于3.0版本修改了一些class name
-下面以datepicker和modal为例 介绍下对于3.0支持的修改
-从源码可以看到  angular-ui bootstrap 对于每个directive的template都存储在了 templateCache中
-所以大多数情况下 我们只需要覆盖其在templateCache对应的key 就可以很好地达到目的</p>
-<h3 id="datepicker">datepicker</h3>
+        <p>angular-ui bootstrap 对 bootstrap 3.0版本支持不是很好<br>由于3.0版本修改了一些class name<br>下面以datepicker和modal为例 介绍下对于3.0支持的修改<br>从源码可以看到  angular-ui bootstrap 对于每个directive的template都存储在了 templateCache中<br>所以大多数情况下 我们只需要覆盖其在templateCache对应的key 就可以很好地达到目的</p>
+<h3>datepicker</h3>
 <ul>
-<li><p>3.0中icon统一以glyphicon开头
-比如 class=&quot;icon-chevron-left&quot; 3.0中改为 class=&quot;glyphicon glyphicon-chevron-left&quot;</p>
+<li><p>3.0中icon统一以glyphicon开头<br>比如 class=“icon-chevron-left” 3.0中改为 class=“glyphicon glyphicon-chevron-left”</p>
 </li>
-<li><p>3.0中button不能简单的只有一个基本的class btn
-比如  class=&quot;btn&quot; 3.0中改为 class=&quot;btn btn-default&quot;</p>
+<li><p>3.0中button不能简单的只有一个基本的class btn<br>比如  class=“btn” 3.0中改为 class=“btn btn-default”</p>
 </li>
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -105,9 +87,9 @@
   ]
 </pre></td></tr></table></figure>
 
-<p>同样道理 修改 &quot;template/datepicker/popup.html&quot;  这样就可以支持3.0了 很简单 (注意文件引入顺序)</p>
+<p>同样道理 修改 “template/datepicker/popup.html”  这样就可以支持3.0了 很简单 (注意文件引入顺序)</p>
 <p>依据angularjs 后注册取代先注册的原则</p>
-<h3 id="modal">modal</h3>
+<h3>modal</h3>
 <p>对于modal 只是引用directive时的html标签需要稍作修改</p>
 <p>另外 对于IE8(angular 1.3明确表示不再支持IE8!!!赞)</p>
 <p>如果在script template中使用了directive会报错</p>
@@ -132,24 +114,24 @@
 13
 14
 15
-</pre></td><td class="code"><pre><span class="keyword">var</span> scriptDirective = [<span class="string">'$templateCache'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$templateCache</span>)</span> {</span>
-  <span class="keyword">return</span> {
-    restrict: <span class="string">'E'</span>,
-    terminal: <span class="keyword">true</span>,
-    compile: <span class="function"><span class="keyword">function</span><span class="params">(element, attr)</span> {</span>
-      <span class="keyword">if</span> (attr.type == <span class="string">'text/ng-template'</span>) {
-        <span class="keyword">var</span> templateUrl = attr.id,
-            <span class="comment">// IE is not consistent, in scripts we have to read .text but in other nodes we have to read .textContent</span>
-            text = element[<span class="number">0</span>].text;
+</pre></td><td class="code"><pre><span class="title">var</span> scriptDirective = ['$templateCache', function($templateCache) {
+  return {
+    restrict:<span class="string"> 'E'</span>,
+    terminal: true,
+    compile: function(element, attr) {
+      <span class="keyword">if</span> (attr.<span class="typedef"><span class="keyword">type</span> == 'text/ng-template') <span class="container">{
+        <span class="title">var</span> <span class="title">templateUrl</span> = <span class="title">attr</span>.<span class="title">id</span>,
+            // <span class="type">IE</span> <span class="title">is</span> <span class="title">not</span> <span class="title">consistent</span>, <span class="title">in</span> <span class="title">scripts</span> <span class="title">we</span> <span class="title">have</span> <span class="title">to</span> <span class="title">read</span> .<span class="title">text</span> <span class="title">but</span> <span class="title">in</span> <span class="title">other</span> <span class="title">nodes</span> <span class="title">we</span> <span class="title">have</span> <span class="title">to</span> <span class="title">read</span> .<span class="title">textContent</span>
+            <span class="title">text</span> = <span class="title">element</span>[0].<span class="title">text</span>;
 
-        <span class="variable">$templateCache</span>.put(templateUrl, text);
-      }
+        $<span class="title">templateCache</span>.<span class="title">put</span>(<span class="title">templateUrl</span>, <span class="title">text</span>);
+      }</span></span>
     }
   };
 }];
 </pre></td></tr></table></figure>
 
-<p><strong>ps: 其实decorator 也是可以修改 directive restrict link的...</strong></p>
+<p><strong>ps: 其实decorator 也是可以修改 directive restrict link的…</strong></p>
 <p>一般人我不告诉他</p>
 <p><a href="http://angular-tips.com/blog/2013/09/experiment-decorating-directives/" target="_blank">Experiment: Decorating Directives</a></p>
 <p>不过目前项目还没有用到</p>
@@ -160,8 +142,7 @@
 <li>公用的service directive 以及 bower</li>
 <li>grunt task 分离 可定义</li>
 <li>公用的grunt task</li>
-<li>不同的部署脚本
-压力山大!!!!</li>
+<li>不同的部署脚本<br>压力山大!!!!</li>
 </ul>
 <p>Have fun!</p>
 
@@ -239,7 +220,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>3</small></li>
+    <li><a href="/categories/blog/">blog</a><small>4</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -269,6 +250,8 @@
     <li><a href="/tags/karma/">karma</a><small>1</small></li>
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>1</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   
