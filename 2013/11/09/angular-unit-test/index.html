@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -63,9 +75,15 @@
     </header>
     <div class="entry">
       
-        <p>首先要说一个angularjs test的坑<br>如果你在项目中使用$logProvider.debugEnabled来配置是否开启$log.debug功能<br>恭喜你!angluar-mock 1.0.8版本中并没有实现debugEnabled方法<br>需要手动配置bower中anguar-mock 版本为1.2.0(目前bower设置为 * 默认会使用1.0.8版本)</p>
-<p>进入正题:<br>我直接将angular unit test framework换成了mocha…<br>另外发现npm中有karma-sinon-chai 果断换了<br>虽然github加星寥寥无几 但是省了自己配置</p>
-<h3>unit test directive (可以使用jquery)</h3>
+        <p>首先要说一个angularjs test的坑
+如果你在项目中使用$logProvider.debugEnabled来配置是否开启$log.debug功能
+恭喜你!angluar-mock 1.0.8版本中并没有实现debugEnabled方法
+需要手动配置bower中anguar-mock 版本为1.2.0(目前bower设置为 * 默认会使用1.0.8版本)</p>
+<p>进入正题:
+我直接将angular unit test framework换成了mocha...
+另外发现npm中有karma-sinon-chai 果断换了
+虽然github加星寥寥无几 但是省了自己配置</p>
+<h3 id="unit-test-directive-jquery-">unit test directive (可以使用jquery)</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -92,36 +110,38 @@
 24
 25
 26
-</pre></td><td class="code"><pre>app = angular.module <span class="string">'App'</span>, []
-app.directive <span class="string">'sample'</span>, -&gt;
-  (scope, elem, attrs) -&gt;
-    elem.<span class="keyword">bind</span> <span class="string">'click'</span>, -&gt;
-      elem.text scope.<span class="variable">$eval</span>(attrs.sample)
+</pre></td><td class="code"><pre>app = angular.<span class="built_in">module</span> <span class="string">'App'</span>, []
+app.directive <span class="string">'sample'</span>,<span class="function"> -&gt;</span>
+  <span class="function"><span class="params">(scope, elem, attrs)</span> -&gt;</span>
+    elem.bind <span class="string">'click'</span>,<span class="function"> -&gt;</span>
+      elem.text scope.$eval(attrs.sample)
 
 <span class="comment">#test</span>
-describe <span class="string">'test the sample directive'</span>, -&gt;
-  scope = null
-  elem = null
-  html = null
+describe <span class="string">'test the sample directive'</span>,<span class="function"> -&gt;</span>
+  scope = <span class="literal">null</span>
+  elem = <span class="literal">null</span>
+  html = <span class="literal">null</span>
 
-  beforeEach -&gt;
-    module <span class="string">'app'</span>
+  beforeEach<span class="function"> -&gt;</span>
+    <span class="built_in">module</span> <span class="string">'app'</span>
     html = <span class="string">'&lt;div sample="foo"&gt;&lt;/div&gt;'</span>
-    inject (<span class="variable">$compile</span>, <span class="variable">$rootScope</span>) -&gt;
-      scope = <span class="variable">$rootScope</span>.<span class="variable">$new</span>()
+    inject <span class="function"><span class="params">($compile, $rootScope)</span> -&gt;</span>
+      scope = $rootScope.$<span class="keyword">new</span>()
       elem = angular.element(html)
-      <span class="variable">$compile</span>(elem)(scope)
-      scope.<span class="variable">$digest</span>()
+      $compile(elem)(scope)
+      scope.$digest()
 
-  it <span class="string">'should set the text of the element to foo'</span>, -&gt;
+  it <span class="string">'should set the text of the element to foo'</span>,<span class="function"> -&gt;</span>
     scope.foo = <span class="string">'foo'</span>
     (elem.text()).should.equal <span class="string">''</span>
     elem[<span class="number">0</span>].click()
     elem.text()).should.equal <span class="string">'foo'</span>
 </pre></td></tr></table></figure>
 
-<h3>unit test controller</h3>
-<p>如果存在service 注入<br>使用mock service<br>测试spy</p>
+<h3 id="unit-test-controller">unit test controller</h3>
+<p>如果存在service 注入
+使用mock service
+测试spy</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -200,9 +220,9 @@ app.factory <span class="string">'Service'</span>,
 
 <span class="comment">#test</span>
 describe <span class="string">'test MainCtrl controller'</span>, -&gt;
-  <span class="variable">$scope</span> = null
-  mainCtrl = null
-  mockService = null
+  <span class="variable">$scope</span> = <span class="keyword">null</span>
+  mainCtrl = <span class="keyword">null</span>
+  mockService = <span class="keyword">null</span>
 
   beforeEach -&gt;
     module <span class="string">'myApp'</span>
@@ -232,8 +252,10 @@ describe <span class="string">'test MainCtrl controller'</span>, -&gt;
     mockService.method.should.have.been.calledOnce
 </pre></td></tr></table></figure>
 
-<h3>unit test service</h3>
-<p>service的测试我认为是最重要的<br>service可以被注入到controller serivce<br>在anguarjs中占有很重要的地位</p>
+<h3 id="unit-test-service">unit test service</h3>
+<p>service的测试我认为是最重要的
+service可以被注入到controller serivce
+在anguarjs中占有很重要的地位</p>
 <ul>
 <li>test a sample service</li>
 </ul>
@@ -278,47 +300,47 @@ describe <span class="string">'test MainCtrl controller'</span>, -&gt;
 39
 40
 41
-</pre></td><td class="code"><pre>app.factory 'Chats',
+</pre></td><td class="code"><pre>app.factory <span class="string">'Chats'</span>,
   [
-    () -&gt;
+    <span class="function"><span class="params">()</span> -&gt;</span>
       chats = []
       <span class="comment">#factory</span>
-      getChats: -&gt;
+      <span class="attribute">getChats</span>:<span class="function"> -&gt;</span>
         chats
-      setChats: (data) -&gt;
+      <span class="attribute">setChats</span>: <span class="function"><span class="params">(data)</span> -&gt;</span>
         chats = data
-      getChat: (<span class="property">id</span>) -&gt;
-        _.find chats, (chat) -&gt;
-          chat.<span class="property">id</span> <span class="keyword">is</span> <span class="property">id</span>
+      <span class="attribute">getChat</span>: <span class="function"><span class="params">(id)</span> -&gt;</span>
+        _.find chats, <span class="function"><span class="params">(chat)</span> -&gt;</span>
+          chat.id <span class="keyword">is</span> id
   ]
 
 <span class="comment">#test</span>
 mockData = [
-  <span class="property">id</span>:<span class="number">1</span>
-  <span class="property">name</span>: 'customer1'
+  <span class="attribute">id</span>:<span class="number">1</span>
+  <span class="attribute">name</span>: <span class="string">'customer1'</span>
 ,
-  <span class="property">id</span>:<span class="number">2</span>
-  <span class="property">name</span>: 'customer2'
+  <span class="attribute">id</span>:<span class="number">2</span>
+  <span class="attribute">name</span>: <span class="string">'customer2'</span>
 ]
-describe 'test Chats service', -&gt;
-  chats = null
-  beforeEach -&gt;
-    module 'App'
-    inject (Chats) -&gt;
+describe <span class="string">'test Chats service'</span>,<span class="function"> -&gt;</span>
+  chats = <span class="literal">null</span>
+  beforeEach<span class="function"> -&gt;</span>
+    <span class="built_in">module</span> <span class="string">'App'</span>
+    inject <span class="function"><span class="params">(Chats)</span> -&gt;</span>
       chats = Chats
 
-  <span class="keyword">it</span> 'should have setChats getChats getChat functions', -&gt;
+  it <span class="string">'should have setChats getChats getChat functions'</span>,<span class="function"> -&gt;</span>
     ((_.isFunction chats.setChats)
     && (_.isFunction chats.getChats)
-    && (_.isFunction chats.getChat)).should.be.<span class="constant">true</span>
+    && (_.isFunction chats.getChat)).should.be.<span class="literal">true</span>
 
-  <span class="keyword">it</span> 'should <span class="keyword">get</span> <span class="keyword">some</span> chats when
-    setChats(mock_data) <span class="keyword">is</span> called' -&gt;
+  it <span class="string">'should get some chats when
+    setChats(mock_data) is called'</span><span class="function"> -&gt;</span>
     chats.setChats mockData
-    chat.getChats().<span class="property">length</span>.should.<span class="keyword">equal</span>(<span class="number">2</span>)
+    chat.getChats().length.should.equal(<span class="number">2</span>)
 
-  <span class="keyword">it</span> 'should <span class="keyword">get</span> a chat which <span class="property">id</span> <span class="keyword">is</span> customer1', -&gt;
-    chat.getChats('customer1').should.exist
+  it <span class="string">'should get a chat which id is customer1'</span>,<span class="function"> -&gt;</span>
+    chat.getChats(<span class="string">'customer1'</span>).should.exist
 </pre></td></tr></table></figure>
 
 <ul>
@@ -372,48 +394,48 @@ describe 'test Chats service', -&gt;
 </pre></td><td class="code"><pre>app.service(<span class="string">'Service'</span>, [
   <span class="string">'$resource'</span>
   <span class="string">'Config'</span>
-  (<span class="variable">$resource</span>, Config) -&gt;
+  <span class="function"><span class="params">($resource, Config)</span> -&gt;</span>
     <span class="comment">#service</span>
-    <span class="variable">@customers</span> = <span class="variable">$resource</span> <span class="string">'/csr/customers'</span>, {}
+    <span class="property">@customers</span> = $resource <span class="string">'/csr/customers'</span>, {}
 
 app.factory <span class="string">'Customers'</span>,
   [
     <span class="string">'Service'</span>
-    (Service) -&gt;
+    <span class="function"><span class="params">(Service)</span> -&gt;</span>
       <span class="comment">#factory</span>
-      fetch: -&gt;
+      <span class="attribute">fetch</span>:<span class="function"> -&gt;</span>
         Service.customers.query()
   ]
 
 <span class="comment">#test</span>
-describe <span class="string">'test Customers service'</span>, -&gt;
-  httpBackend = null
-  customers = null
-  beforeEach -&gt;
-    module <span class="string">'App'</span>
+describe <span class="string">'test Customers service'</span>,<span class="function"> -&gt;</span>
+  httpBackend = <span class="literal">null</span>
+  customers = <span class="literal">null</span>
+  beforeEach<span class="function"> -&gt;</span>
+    <span class="built_in">module</span> <span class="string">'App'</span>
 
-  inject (<span class="variable">$httpBackend</span>, Customers) -&gt;
+  inject <span class="function"><span class="params">($httpBackend, Customers)</span> -&gt;</span>
     customers = Customers
-    httpBackend = <span class="variable">$httpBackend</span>
+    httpBackend = $httpBackend
 
   <span class="comment">#make sure no expectations were missed</span>
-  afterEach -&gt;
+  afterEach<span class="function"> -&gt;</span>
     httpBackend.verifyNoOutstandingExpectation()
     httpBackend.verifyNoOutstandingRequest()
 
   it <span class="string">'should get a customer whose name is customer1
-    when Customers.fetch() is called'</span>, -&gt;
+    when Customers.fetch() is called'</span>,<span class="function"> -&gt;</span>
     mockData = [
-      id: <span class="number">1</span>
-      name: <span class="string">'customer1'</span>
+      <span class="attribute">id</span>: <span class="number">1</span>
+      <span class="attribute">name</span>: <span class="string">'customer1'</span>
     ,
-      id: <span class="number">2</span>
-      name: <span class="string">'customer2'</span>
+      <span class="attribute">id</span>: <span class="number">2</span>
+      <span class="attribute">name</span>: <span class="string">'customer2'</span>
     ]
-    <span class="variable">$httpBackend</span>.expectGET(<span class="string">'/csr/customers/\*/'</span>).respond mockData
+    $httpBackend.expectGET(<span class="string">'/csr/customers/\*/'</span>).respond mockData
     result = customers.fetch()
-    <span class="variable">$httpBackend</span>.flush()
-    (<span class="number">_</span>.find reuslt, (item) -&gt; item.name is <span class="string">'customer1'</span>).should.exsit
+    $httpBackend.flush()
+    <span class="function"><span class="params">(_.find reuslt, (item) -&gt; item.name <span class="keyword">is</span> <span class="string">'customer1'</span>)</span>.<span class="title">should</span>.<span class="title">exsit</span></span>
 </pre></td></tr></table></figure>
 
 <ul>
@@ -465,51 +487,52 @@ describe <span class="string">'test Customers service'</span>, -&gt;
 44
 </pre></td><td class="code"><pre>app.factory <span class="string">'Storage'</span>,
   [
-    <span class="variable">$window</span>
-    (<span class="variable">$window</span>) -&gt;
-      storage =  <span class="variable">$window</span>.localStorage
+    $<span class="built_in">window</span>
+    <span class="function"><span class="params">($<span class="built_in">window</span>)</span> -&gt;</span>
+      storage =  $<span class="built_in">window</span>.localStorage
       <span class="comment">#factory</span>
-      message:
-        add: (msgs) -&gt;
+      <span class="attribute">message</span>:
+        <span class="attribute">add</span>: <span class="function"><span class="params">(msgs)</span> -&gt;</span>
             <span class="comment">#add to storage</span>
   ]
 
 app.factory <span class="string">'Message'</span>,
   [
     <span class="string">'Storage'</span>
-    (Storage) -&gt;
+    <span class="function"><span class="params">(Storage)</span> -&gt;</span>
       <span class="comment">#factory</span>
-      receivedMessage: (msg) -&gt;
+      <span class="attribute">receivedMessage</span>: <span class="function"><span class="params">(msg)</span> -&gt;</span>
         Storage.message.add msg
   ]
 
 <span class="comment">#test</span>
-describe <span class="string">'test Messsage service'</span>, -&gt;
-  message = null
-  mockStorage = null
+describe <span class="string">'test Messsage service'</span>,<span class="function"> -&gt;</span>
+  message = <span class="literal">null</span>
+  mockStorage = <span class="literal">null</span>
 
-  beforeEach -&gt;
-    module <span class="string">'App'</span>, (<span class="variable">$provide</span>) -&gt;
+  beforeEach<span class="function"> -&gt;</span>
+    <span class="built_in">module</span> <span class="string">'App'</span>, <span class="function"><span class="params">($provide)</span> -&gt;</span>
       mockStorage =
-        add: sinon.spy()
-      <span class="variable">$provide</span>.value <span class="string">'Storage'</span>, mockStorage
+        <span class="attribute">add</span>: sinon.spy()
+      $provide.value <span class="string">'Storage'</span>, mockStorage
       <span class="keyword">return</span> <span class="comment">#for coffee</span>
-    inject (Message) -&gt;
+    inject <span class="function"><span class="params">(Message)</span> -&gt;</span>
       message = Message
 
   it <span class="string">'should call Storage.add()
-    when Message.receivedMessage passing through message params'</span>, -&gt;
+    when Message.receivedMessage passing through message params'</span>,<span class="function"> -&gt;</span>
     message.receivedMessage
-      fromId: <span class="string">'customer1'</span>
-      toId: <span class="string">'csr3'</span>
-      content: <span class="string">'hello world'</span>
+      <span class="attribute">fromId</span>: <span class="string">'customer1'</span>
+      <span class="attribute">toId</span>: <span class="string">'csr3'</span>
+      <span class="attribute">content</span>: <span class="string">'hello world'</span>
     mockStorage.add.should.have.been.calledWithMatch
-      fromId: <span class="string">'customer1'</span>
-      toId: <span class="string">'csr3'</span>
-      content: <span class="string">'hello world'</span>
+      <span class="attribute">fromId</span>: <span class="string">'customer1'</span>
+      <span class="attribute">toId</span>: <span class="string">'csr3'</span>
+      <span class="attribute">content</span>: <span class="string">'hello world'</span>
 </pre></td></tr></table></figure>
 
-<p>完毕~<br>下次写e2e test</p>
+<p>完毕~
+下次写e2e test</p>
 <p>Have fun!</p>
 
       
@@ -586,7 +609,7 @@ describe <span class="string">'test Messsage service'</span>, -&gt;
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -617,7 +640,7 @@ describe <span class="string">'test Messsage service'</span>, -&gt;
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

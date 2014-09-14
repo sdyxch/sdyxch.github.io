@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -63,7 +75,12 @@
     </header>
     <div class="entry">
       
-        <p><a href="https://github.com/ericclemmons/grunt-angular-templates" target="_blank">grunt-angular-templates</a><br>模板文件会导致每次都去服务器请求..<br>使用 grunt-angular-templates grunt build时 将模板文件转为js文件<br>(html-&gt;stirng-&gt;$templateCache)<br>再通过manifest作本地cache<br>妥妥的..</p>
+        <p><a href="https://github.com/ericclemmons/grunt-angular-templates" target="_blank">grunt-angular-templates</a>
+模板文件会导致每次都去服务器请求..
+使用 grunt-angular-templates grunt build时 将模板文件转为js文件
+(html-&gt;stirng-&gt;$templateCache)
+再通过manifest作本地cache
+妥妥的..</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -73,15 +90,15 @@
 7
 8
 9
-</pre></td><td class="code"><pre><span class="method">ngtemplates:</span>
-  <span class="method">dist:</span>
-    <span class="method">options:</span>
-      <span class="method">base:</span> <span class="string">'&lt;%= yeoman.app %&gt;'</span>
-      # <span class="method">concat:</span> <span class="string">'&lt;%= yeoman.dist %&gt;/scripts/scripts.js'</span>
-      <span class="method">module:</span> yeomanConfig.name
-    <span class="method">cwd:</span> <span class="string">'&lt;%= yeoman.app %&gt;'</span>
-    <span class="method">src:</span> <span class="string">'views/**.html'</span>
-    <span class="method">dest:</span> <span class="string">'.tmp/scripts/templateCache.js'</span>
+</pre></td><td class="code"><pre>ngtemplates:
+  dist:
+    options:
+      base: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
+      <span class="preprocessor"># concat: '&lt;%= yeoman.dist %&gt;/scripts/scripts.js'</span>
+      <span class="keyword">module</span>: yeomanConfig.name
+    cwd: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
+    src: <span class="comment">'views/**.html'</span>
+    dest: <span class="comment">'.tmp/scripts/templateCache.js'</span>
 </pre></td></tr></table></figure>
 
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
@@ -163,7 +180,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -194,7 +211,7 @@
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

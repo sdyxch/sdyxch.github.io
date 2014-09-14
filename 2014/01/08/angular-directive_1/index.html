@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -63,25 +75,25 @@
     </header>
     <div class="entry">
       
-        <h2>compile link controller</h2>
-<h3>作用</h3>
-<h4>compile</h4>
+        <h2 id="compile-link-controller">compile link controller</h2>
+<h3 id="-">作用</h3>
+<h4 id="compile">compile</h4>
 <ul>
 <li>where Angular actually compiles your directive</li>
 <li>dom渲染前变形 not need scope</li>
 <li>同类directive共享方法</li>
 <li>性能</li>
 </ul>
-<h4>link</h4>
+<h4 id="link">link</h4>
 <ul>
 <li>attach the scope data (2-way data binding)</li>
 <li>实现dom行为 ($watch $observe)</li>
 </ul>
-<h4>controller</h4>
+<h4 id="controller">controller</h4>
 <ul>
 <li>share api to other directives(requires)</li>
 </ul>
-<h3>执行时间</h3>
+<h3 id="-">执行时间</h3>
 <p>parent compile</p>
 <p>child compile</p>
 <p>parent controller</p>
@@ -90,7 +102,7 @@
 <p>child pre-link</p>
 <p>child post-link</p>
 <p>parent post-link</p>
-<h3>prelink postlink</h3>
+<h3 id="prelink-postlink">prelink postlink</h3>
 <ul>
 <li>基本上不需要使用prelink</li>
 <li>prelink应用在当我们需要在link之前操作scope data而不是操作dom(会破坏绑定过程)</li>
@@ -171,7 +183,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -202,7 +214,7 @@
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

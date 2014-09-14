@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -64,7 +76,7 @@
     <div class="entry">
       
         <p>angular1.2 ngAnimate 有所改动</p>
-<h3>class</h3>
+<h3 id="class">class</h3>
 <ul>
 <li>ngRepeat  enter, leave and move</li>
 <li>ngView  enter and leave</li>
@@ -74,8 +86,9 @@
 <li>ngClass add and remove</li>
 <li>ngShow &amp; ngHide add and remove (the ng-hide class value)</li>
 </ul>
-<h3>JavaScript-defined Animations</h3>
-<p>angular ngAnimate 可以使用js设置 比如 jquery tweenmax mootools..<br>官方文档如是说：</p>
+<h3 id="javascript-defined-animations">JavaScript-defined Animations</h3>
+<p>angular ngAnimate 可以使用js设置 比如 jquery tweenmax mootools..
+官方文档如是说：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -103,37 +116,37 @@
 25
 26
 27
-</pre></td><td class="code"><pre><span class="reserved">var</span> ngModule = angular.module(<span class="string">'YourApp'</span>, []);
-ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span class="reserved">function</span>() {
+</pre></td><td class="code"><pre><span class="keyword">var</span> ngModule = angular.module(<span class="string">'YourApp'</span>, []);
+ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
   <span class="keyword">return</span> {
-    enter: <span class="reserved">function</span>(element, done) {
-      <span class="regexp">//</span>run the animation here <span class="keyword">and</span> call done <span class="keyword">when</span> the animation <span class="keyword">is</span> complete
-      <span class="keyword">return</span> <span class="reserved">function</span>(cancelled) {
-        <span class="regexp">//</span><span class="keyword">this</span> (optional) <span class="reserved">function</span> will be called <span class="keyword">when</span> the animation
-        <span class="regexp">//</span>completes <span class="keyword">or</span> <span class="keyword">when</span> the animation <span class="keyword">is</span> cancelled (the cancelled
-        <span class="regexp">//</span>flag will be set to <span class="literal">true</span> <span class="keyword">if</span> cancelled).
+    enter: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span>
+      <span class="comment">//run the animation here and call done when the animation is complete</span>
+      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(cancelled)</span> {</span>
+        <span class="comment">//this (optional) function will be called when the animation</span>
+        <span class="comment">//completes or when the animation is cancelled (the cancelled</span>
+        <span class="comment">//flag will be set to true if cancelled).</span>
       }
     }
-    leave: <span class="reserved">function</span>(element, done) { },
-    move: <span class="reserved">function</span>(element, done) { },
+    leave: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span> },
+    move: <span class="function"><span class="keyword">function</span><span class="params">(element, done)</span> {</span> },
 
-    <span class="regexp">//</span>animation that can be triggered before the <span class="class"><span class="keyword">class</span> <span class="title">is</span> <span class="title">added</span></span>
-    beforeAddClass: <span class="reserved">function</span>(element, className, done) { },
+    <span class="comment">//animation that can be triggered before the class is added</span>
+    beforeAddClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
 
-    <span class="regexp">//</span>animation that can be triggered after the <span class="class"><span class="keyword">class</span> <span class="title">is</span> <span class="title">added</span></span>
-    addClass: <span class="reserved">function</span>(element, className, done) { },
+    <span class="comment">//animation that can be triggered after the class is added</span>
+    addClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
 
-    <span class="regexp">//</span>animation that can be triggered before the <span class="class"><span class="keyword">class</span> <span class="title">is</span> <span class="title">removed</span></span>
-    beforeRemoveClass: <span class="reserved">function</span>(element, className, done) { },
+    <span class="comment">//animation that can be triggered before the class is removed</span>
+    beforeRemoveClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> },
 
-    <span class="regexp">//</span>animation that can be triggered after the <span class="class"><span class="keyword">class</span> <span class="title">is</span> <span class="title">removed</span></span>
-    removeClass: <span class="reserved">function</span>(element, className, done) { }
+    <span class="comment">//animation that can be triggered after the class is removed</span>
+    removeClass: <span class="function"><span class="keyword">function</span><span class="params">(element, className, done)</span> {</span> }
   }
 });
 </pre></td></tr></table></figure>
 
 <p>可参考<a href="https://github.com/yearofmoo/ngAnimate-animate.css" target="_blank">ngAnimate-animate.css</a></p>
-<h3>CSS-defined Animations</h3>
+<h3 id="css-defined-animations">CSS-defined Animations</h3>
 <ul>
 <li>CSS transitions</li>
 </ul>
@@ -170,11 +183,11 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
  is attached to the element once the enter animation event is triggered
 */</span>
 <span class="class">.reveal-animation</span><span class="class">.ng-enter</span> <span class="rules">{
- <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1</span>s linear all;</span></span> <span class="comment">/* Safari/Chrome */</span>
- <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1</span>s linear all;</span></span> <span class="comment">/* All other modern browsers and IE10+ */</span>
+ <span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value"> <span class="number">1</span>s linear all</span></span>; <span class="comment">/* Safari/Chrome */</span>
+ <span class="rule"><span class="attribute">transition</span>:<span class="value"> <span class="number">1</span>s linear all</span></span>; <span class="comment">/* All other modern browsers and IE10+ */</span>
 
  <span class="comment">/* The animation preparation code */</span>
- <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span>;</span></span>
+ <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span></span></span>;
 <span class="rule">}</span></span>
 
 <span class="comment">/*
@@ -184,7 +197,7 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
 */</span>
 <span class="class">.reveal-animation</span><span class="class">.ng-enter</span><span class="class">.ng-enter-active</span> <span class="rules">{
  <span class="comment">/* The animation code itself */</span>
- <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span>;</span></span>
+ <span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span></span></span>;
 <span class="rule">}</span></span>
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
 
@@ -216,16 +229,16 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
 18
 </pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
 <span class="class">.reveal-animation</span><span class="class">.ng-enter</span> <span class="rules">{
-  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear;</span></span> <span class="comment">/* Safari/Chrome */</span>
-  <span class="rule"><span class="attribute">animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear;</span></span> <span class="comment">/* IE10+ and Future Browsers */</span>
+  <span class="rule"><span class="attribute">-webkit-animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear</span></span>; <span class="comment">/* Safari/Chrome */</span>
+  <span class="rule"><span class="attribute">animation</span>:<span class="value"> enter_sequence <span class="number">1</span>s linear</span></span>; <span class="comment">/* IE10+ and Future Browsers */</span>
 <span class="rule">}</span></span>
-<span class="at_rule">@-webkit-keyframes enter_sequence </span>{
-  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span>;</span></span> <span class="rule">}</span></span>
-  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span>;</span></span> <span class="rule">}</span></span>
+<span class="at_rule">@<span class="keyword">-webkit-keyframes</span> enter_sequence </span>{
+  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span></span></span>; <span class="rule">}</span></span>
+  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span></span></span>; <span class="rule">}</span></span>
 }
-<span class="at_rule">@keyframes enter_sequence </span>{
-  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span>;</span></span> <span class="rule">}</span></span>
-  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span>;</span></span> <span class="rule">}</span></span>
+<span class="at_rule">@<span class="keyword">keyframes</span> enter_sequence </span>{
+  <span class="tag">from</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">0</span></span></span>; <span class="rule">}</span></span>
+  <span class="tag">to</span> <span class="rules">{ <span class="rule"><span class="attribute">opacity</span>:<span class="value"><span class="number">1</span></span></span>; <span class="rule">}</span></span>
 }
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
 
@@ -234,8 +247,9 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 </pre></td></tr></table></figure>
 
-<h3>以上都是废话 直接看文档好了…….</h3>
-<p>神奇的<a href="https://github.com/daneden/animate.css" target="_blank">animate.css</a><br>动画就是浮云了..</p>
+<h3 id="-">以上都是废话 直接看文档好了.......</h3>
+<p>神奇的<a href="https://github.com/daneden/animate.css" target="_blank">animate.css</a>
+动画就是浮云了..</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -277,12 +291,12 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
   &<span class="preprocessor">.csr</span>_text
     &<span class="preprocessor">.ng</span>-enter
       animation slideInRight <span class="number">.25</span>s
-  &<span class="preprocessor">.customer</span>_<span class="keyword">call</span>
+  &<span class="preprocessor">.customer</span>_call
     &<span class="preprocessor">.ng</span>-enter
       animation swing <span class="number">.5</span>s
 </pre></td></tr></table></figure>
 
-<p>ps: stylus 自己写@keyframes animation transform 就是个渣渣啊…</p>
+<p>ps: stylus 自己写@keyframes animation transform 就是个渣渣啊...</p>
 <p>Have fun!</p>
 
       
@@ -359,7 +373,7 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -390,7 +404,7 @@ ngModule.animation(<span class="string">'.my-crazy-animation'</span>, <span clas
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

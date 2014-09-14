@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -63,8 +75,9 @@
     </header>
     <div class="entry">
       
-        <h3>karma配置</h3>
-<p>修改了karma的配置 可以直接对coffee文件执行<br>遇到几个问题</p>
+        <h3 id="karma-">karma配置</h3>
+<p>修改了karma的配置 可以直接对coffee文件执行
+遇到几个问题</p>
 <ul>
 <li>文件匹配采用的是minMatch语法</li>
 </ul>
@@ -72,10 +85,10 @@
 2
 3
 4
-</pre></td><td class="code"><pre><span class="string">"app/views/<span class="variable">*.</span>html"</span>
-<span class="string">"app/scripts/<span class="variable">**</span>/!(mock).coffee"</span>
+</pre></td><td class="code"><pre><span class="string">"app/views/*.html"</span>
+<span class="string">"app/scripts/**/!(mock).coffee"</span>
 <span class="string">"test/mock/unit-mocks.coffee"</span>
-<span class="string">"test/spec/<span class="variable">**</span>/<span class="variable">*.</span>coffee"</span>
+<span class="string">"test/spec/**/*.coffee"</span>
 </pre></td></tr></table></figure>
 
 <ul>
@@ -87,10 +100,10 @@
 4
 5
 </pre></td><td class="code"><pre>preprocessors:
-  "app/scripts<span class="comment">/**/</span>!(mock).coffee": "coffee"
-  "test/mock/unit-mocks.coffee": "coffee"
-  "test/spec<span class="comment">/**/</span>*.coffee": "coffee"
-  'app/views<span class="comment">/*.html': 'ng-html2js'
+  <span class="string">"app/scripts/**/!(mock).coffee"</span>: <span class="string">"coffee"</span>
+  <span class="string">"test/mock/unit-mocks.coffee"</span>: <span class="string">"coffee"</span>
+  <span class="string">"test/spec/**/*.coffee"</span>: <span class="string">"coffee"</span>
+  <span class="string">'app/views/*.html'</span>: <span class="string">'ng-html2js'</span>
 </pre></td></tr></table></figure>
 
 <p>Have fun!</p>
@@ -169,7 +182,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -200,7 +213,7 @@
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

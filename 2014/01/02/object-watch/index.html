@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -63,8 +75,14 @@
     </header>
     <div class="entry">
       
-        <p>最近一直在抱怨titanium没有KVO..<br>今天晚上突然想通了..<br>自己真是SB..<br>- Js基于对象!<br>- 就算ECMAScript 6不够普及 还有 ECMAScript 5啊!</p>
-<h3>watch</h3>
+        <p>最近一直在抱怨titanium没有KVO..
+今天晚上突然想通了..
+自己真是SB..</p>
+<ul>
+<li>Js基于对象!</li>
+<li>就算ECMAScript 6不够普及 还有 ECMAScript 5啊!</li>
+</ul>
+<h3 id="watch">watch</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -101,45 +119,45 @@
 34
 35
 36
-</pre></td><td class="code"><pre>unless <span class="class">Object</span>::watch?
-  <span class="class">Object</span>.defineProperty <span class="class">Object</span>.prototype, <span class="string">'watch'</span>,
-    <span class="method">enumerable:</span> <span class="keyword">false</span>
-    <span class="method">configurable:</span> <span class="keyword">true</span>
-    <span class="method">writable:</span> <span class="keyword">false</span>
-    <span class="method">value:</span> (props, handler) -&gt;
+</pre></td><td class="code"><pre><span class="keyword">unless</span> <span class="attribute">Object</span>::watch?
+  Object.defineProperty Object.prototype, <span class="string">'watch'</span>,
+    <span class="attribute">enumerable</span>: <span class="literal">false</span>
+    <span class="attribute">configurable</span>: <span class="literal">true</span>
+    <span class="attribute">writable</span>: <span class="literal">false</span>
+    <span class="attribute">value</span>: <span class="function"><span class="params">(props, handler)</span> -&gt;</span>
       props = [].concat props
-      <span class="keyword">self</span> = @
-      props.forEach (prop) -&gt;
-        oldval = <span class="keyword">self</span>[prop]
+      self = @
+      props.forEach <span class="function"><span class="params">(prop)</span> -&gt;</span>
+        oldval = self[prop]
         newval = oldval
-        getter = -&gt;
+        <span class="function"><span class="title">getter</span> = -&gt;</span>
           newval;
-        setter = (val) -&gt;
+        <span class="function"><span class="title">setter</span> = <span class="params">(val)</span> -&gt;</span>
           oldval = newval
           newval = val
-          handler.call <span class="keyword">self</span>, prop, oldval, newval
-        if delete <span class="keyword">self</span>[prop]
-          <span class="class">Object</span>.defineProperty <span class="keyword">self</span>, prop,
-            <span class="method">get:</span> getter
-            <span class="method">set:</span> setter
-            <span class="method">enumerable:</span> <span class="keyword">true</span>
-            <span class="method">configurable:</span> <span class="keyword">true</span>
+          handler.call self, prop, oldval, newval
+        <span class="keyword">if</span> <span class="keyword">delete</span> self[prop]
+          Object.defineProperty self, prop,
+            <span class="attribute">get</span>: getter
+            <span class="attribute">set</span>: setter
+            <span class="attribute">enumerable</span>: <span class="literal">true</span>
+            <span class="attribute">configurable</span>: <span class="literal">true</span>
 
-unless <span class="class">Object</span>::unwatch?
-  <span class="class">Object</span>.defineProperty <span class="class">Object</span>.prototype, <span class="string">'unwatch'</span>,
-    <span class="method">enumerable:</span> <span class="keyword">false</span>
-    <span class="method">configurable:</span> <span class="keyword">true</span>
-    <span class="method">writable:</span> <span class="keyword">false</span>
-    <span class="method">value:</span> (props) -&gt;
+<span class="keyword">unless</span> <span class="attribute">Object</span>::unwatch?
+  Object.defineProperty Object.prototype, <span class="string">'unwatch'</span>,
+    <span class="attribute">enumerable</span>: <span class="literal">false</span>
+    <span class="attribute">configurable</span>: <span class="literal">true</span>
+    <span class="attribute">writable</span>: <span class="literal">false</span>
+    <span class="attribute">value</span>: <span class="function"><span class="params">(props)</span> -&gt;</span>
       props = [].concat props
-      <span class="keyword">self</span> = @
-      props.forEach (prop) -&gt;
-        val = <span class="keyword">self</span>[prop]
-        delete <span class="keyword">self</span>[prop]
+      self = @
+      props.forEach <span class="function"><span class="params">(prop)</span> -&gt;</span>
+        val = self[prop]
+        <span class="keyword">delete</span> self[prop]
         @[prop] = val
 </pre></td></tr></table></figure>
 
-<h3>test</h3>
+<h3 id="test">test</h3>
 <figure class="highlight"><table><tr><td class="gutter"><pre>1
 2
 3
@@ -164,28 +182,28 @@ unless <span class="class">Object</span>::unwatch?
 22
 23
 </pre></td><td class="code"><pre>obj =
-  aa: <span class="string">'1'</span>
-  bb:
-    bb: <span class="number">1</span>
-  cc: true
-  dd: <span class="matrix">[<span class="number">1</span>]</span>
-<span class="transposed_variable">obj.</span>watch <span class="string">'aa'</span>, (prop, oldval, newval) -&gt;
-  <span class="transposed_variable">console.</span><span class="built_in">log</span> prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
-<span class="transposed_variable">obj.</span>watch <span class="matrix">[<span class="string">'bb'</span>, <span class="string">'cc'</span>, <span class="string">'dd'</span>]</span>, (prop, oldval, newval) -&gt;
-  <span class="transposed_variable">console.</span><span class="built_in">log</span> prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
-<span class="transposed_variable">obj.</span>aa = <span class="string">'hello'</span>
-<span class="transposed_variable">obj.</span>bb = bb:<span class="number">2</span>
-<span class="transposed_variable">obj.</span>cc = false
-<span class="transposed_variable">obj.</span>dd = <span class="matrix">[<span class="number">2</span>]</span>
-<span class="transposed_variable">obj.</span>unwatch <span class="string">'aa'</span>
-<span class="transposed_variable">obj.</span>unwatch <span class="string">'bb'</span>
-<span class="transposed_variable">obj.</span>unwatch <span class="string">'cc'</span>
-<span class="transposed_variable">obj.</span>unwatch <span class="string">'dd'</span>
-<span class="transposed_variable">obj.</span>aa = <span class="string">'hello'</span>
-<span class="transposed_variable">obj.</span>bb =
-  bb:<span class="number">3</span>
-<span class="transposed_variable">obj.</span>cc = true
-<span class="transposed_variable">obj.</span>dd = <span class="matrix">[<span class="number">3</span>]</span>
+  <span class="attribute">aa</span>: <span class="string">'1'</span>
+  <span class="attribute">bb</span>:
+    <span class="attribute">bb</span>: <span class="number">1</span>
+  <span class="attribute">cc</span>: <span class="literal">true</span>
+  <span class="attribute">dd</span>: [<span class="number">1</span>]
+obj.watch <span class="string">'aa'</span>, <span class="function"><span class="params">(prop, oldval, newval)</span> -&gt;</span>
+  <span class="built_in">console</span>.log prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
+obj.watch [<span class="string">'bb'</span>, <span class="string">'cc'</span>, <span class="string">'dd'</span>], <span class="function"><span class="params">(prop, oldval, newval)</span> -&gt;</span>
+  <span class="built_in">console</span>.log prop, <span class="string">' change from: '</span>, oldval, <span class="string">'to: '</span>, newval
+obj.aa = <span class="string">'hello'</span>
+obj.bb = <span class="attribute">bb</span>:<span class="number">2</span>
+obj.cc = <span class="literal">false</span>
+obj.dd = [<span class="number">2</span>]
+obj.unwatch <span class="string">'aa'</span>
+obj.unwatch <span class="string">'bb'</span>
+obj.unwatch <span class="string">'cc'</span>
+obj.unwatch <span class="string">'dd'</span>
+obj.aa = <span class="string">'hello'</span>
+obj.bb =
+  <span class="attribute">bb</span>:<span class="number">3</span>
+obj.cc = <span class="literal">true</span>
+obj.dd = [<span class="number">3</span>]
 </pre></td></tr></table></figure>
 
 
@@ -263,7 +281,7 @@ unless <span class="class">Object</span>::unwatch?
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -294,7 +312,7 @@ unless <span class="class">Object</span>::unwatch?
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   

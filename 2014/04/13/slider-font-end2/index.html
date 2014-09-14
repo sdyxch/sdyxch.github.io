@@ -1,0 +1,429 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>分享(开发者) | 我是你爸爸</title>
+  <meta name="author" content="杨鑫诚Bruce">
+  
+  <meta name="description" content="我是你爸爸">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="分享(开发者)"/>
+  <meta property="og:site_name" content="我是你爸爸"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="我是你爸爸" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">我是你爸爸</a></h1>
+  <h2><a href="/">在动物园散步才是正经事</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="https://github.com/sdyxch">Github</a></li>
+    
+      <li><a href="http://www.weibo.com/801963408">Weibo</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-04-13T02:30:00.000Z"><a href="/2014/04/13/slider-font-end2/">Apr 13 2014</a></time>
+      
+      
+  
+    <h1 class="title">分享(开发者)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="viewport">Viewport</h2>
+<ul>
+<li>width : viewport的宽度</li>
+<li>height : viewport的高度</li>
+<li>initial-scale : 初始的缩放比例</li>
+<li>minimum-scale : 允许用户缩放到的最小比例</li>
+<li>maximum-scale : 允许用户缩放到的最大比例</li>
+<li>user-scalable : 用户是否可以手动缩放</li>
+<li>minimal-ui iOS7.1 : 隐藏顶部地址栏和底部导航栏 (顶部底部 点击区域)</li>
+</ul>
+<h2 id="media-query">Media Query</h2>
+<ul>
+<li><a href="http://nmsdvid.com/snippets/" target="_blank">Media Query Snippets</a></li>
+<li><a href="http://bjango.com/articles/min-device-pixel-ratio/" target="_blank">Ratio Snippets</a></li>
+</ul>
+<h2 id="hairlines">Hairlines</h2>
+<p><img src="http://mir.aculo.us/wp-content/uploads/2013/09/hairlines1.png" style="width:80%; margin:auto;display:block;"></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>/* 1px hairline, using a GIF  */
+background: repeat-x bottom left
+  url(data:image/gif;base64,R0lGODlhAQACAPABAMjHzP///yH/C1hNUCBEYXRhWE1QAz94cAAh+QQFAAABACwAAAAAAQACAAACAgwKADs=);
+background-size: 100% 1px;
+
+/* 1px hairline, using SVG (background-size property not required) */
+background: repeat-x bottom left
+  url("data:image/svg+xml;utf8,<span class="tag">&lt;<span class="title">svg</span> <span class="attribute">xmlns</span>=<span class="value">'http://www.w3.org/2000/svg'</span> <span class="attribute">width</span>=<span class="value">'1'</span> <span class="attribute">height</span>=<span class="value">'1'</span>&gt;</span><span class="tag">&lt;<span class="title">rect</span> <span class="attribute">fill</span>=<span class="value">'#ff0000'</span> <span class="attribute">x</span>=<span class="value">'0'</span> <span class="attribute">y</span>=<span class="value">'0'</span> <span class="attribute">width</span>=<span class="value">'1'</span> <span class="attribute">height</span>=<span class="value">'0.5'</span>/&gt;</span><span class="tag">&lt;/<span class="title">svg</span>&gt;</span>");
+</pre></td></tr></table></figure>
+
+<h2 id="font">Font</h2>
+<h3 id="basic">Basic</h3>
+<ul>
+<li>-apple-system-font</li>
+<li>html default font: 16px</li>
+<li>em  rem(root em)</li>
+<li>iOS 横屏禁止字体放大: -webkit-text-size-adjust: none （100%）</li>
+<li>反锯齿: -webkit-font-smoothing:antialiased</li>
+<li>tamplate</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
+    <span class="rule"><span class="attribute">font-family</span>:<span class="value"> <span class="string">"Helvetica Neue"</span>, Helvetica, STHeiTi, sans-serif</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<h2 id="font-icons">Font icons</h2>
+<ul>
+<li>@font-face</li>
+<li>@font-face 标题模糊: font-weight: 400;</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre>[<span class="keyword">class</span>^=<span class="string">"icon-"</span>] {
+  display: <span class="keyword">inline</span>-block;
+  speak: none
+  font-family: <span class="string">"xxx"</span>;
+  font-size: <span class="number">1</span>rem;
+  line-height: <span class="number">1</span>;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-search:before {
+  content: <span class="string">"\003433"</span>;
+}
+
+&lt;i <span class="keyword">class</span>=<span class="string">"icon-search"</span>&gt;&lt;/i&gt;
+</pre></td></tr></table></figure>
+
+<h2 id="responsive-web">Responsive Web</h2>
+<h3 id="test">Test</h3>
+<ul>
+<li><a href="http://lab.maltewassermann.com/viewport-resizer/" target="_blank">resizer</a></li>
+</ul>
+<h3 id="image">Image</h3>
+<ul>
+<li>css sprite  &amp;  background-image &amp; image-set</li>
+<li>弹性图片</li>
+<li><a href="https://github.com/scottjehl/picturefill" target="_blank">picturefill</a></li>
+</ul>
+<h3 id="flex-box">Flex Box</h3>
+<ul>
+<li><a href="http://www.w3cplus.com/blog/666.html" target="_blank">伸缩盒模型</a></li>
+</ul>
+<h2 id="tips">Tips</h2>
+<h3 id="ios-native-like-scroll">iOS Native Like Scroll</h3>
+<ul>
+<li>iscoll(4, 5)</li>
+<li>overthrow</li>
+<li>css(Android 3.0+   iOS 5.0+)<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
+  <span class="rule"><span class="attribute">-webkit-overflow-scrolling</span>:<span class="value"> touch</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="-">动画性能</h3>
+<ul>
+<li>重排relayout</li>
+<li>重绘repaint **</li>
+<li>重组recomposite</li>
+</ul>
+<p><img src="https://camo.githubusercontent.com/9a7812cd5a327c5384eea3d3c33aa875543aef56/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f3637373131342f313735323338332f31663863356538652d363631632d313165332d393732352d3330366637653563373366352e706e67"/></p>
+<h3 id="-">动画元素 减少重排</h3>
+<p>不在文档流中</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre><span class="attribute">position</span>: <span class="string">fixed;</span>
+<span class="attribute">position</span>: <span class="string">absolute;</span>
+</pre></td></tr></table></figure>
+
+<h3 id="translate3d-gpu-">translate3d GPU加速</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre>-webkit-<span class="attribute">transform</span><span class="value">: translate3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span>
+-moz-<span class="attribute">transform</span><span class="value">: translate3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span>
+-ms-<span class="attribute">transform</span><span class="value">: translate3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span>
+<span class="attribute">transform</span><span class="value">: translate3d(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span>
+</pre></td></tr></table></figure>
+
+<h3 id="-transition-">消除transition闪屏</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>-webkit-<span class="attribute">backface-visibility</span><span class="value">: hidden;</span>
+-moz-<span class="attribute">backface-visibility</span><span class="value">: hidden;</span>
+-ms-<span class="attribute">backface-visibility</span><span class="value">: hidden;</span>
+<span class="attribute">backface-visibility</span><span class="value">: hidden;</span>
+
+-webkit-<span class="attribute">perspective</span><span class="value">: <span class="number">1000</span>;</span>
+-moz-<span class="attribute">perspective</span><span class="value">: <span class="number">1000</span>;</span>
+-ms-<span class="attribute">perspective</span><span class="value">: <span class="number">1000</span>;</span>
+<span class="attribute">perspective</span><span class="value">: <span class="number">1000</span>;</span>
+</pre></td></tr></table></figure>
+
+<h3 id="js-requestanimationframe">js动画 requestAnimationFrame</h3>
+<ul>
+<li><a href="http://jinlong.github.io/blog/2013/06/24/better-performance-with-requestanimationframe/" target="_blank">requestAnimationFrame</a></li>
+</ul>
+<h3 id="inline-block">inline-block</h3>
+<p>inline-block元素之间 会有空白 : 写成一行..</p>
+<h3 id="click">click</h3>
+<ul>
+<li>300ms delay</li>
+<li>点击区域闪一下: -webkit-tap-highlight-color: rgba(0,0,0,0);</li>
+<li>:active伪类样式无效: body ontouchstart=&quot;&quot;</li>
+<li>点透: pointer-event: none</li>
+</ul>
+<h3 id="border-radius">border-radius</h3>
+<p>Android &lt;=2.3 border-radius 不能使用% 圆形 : border-radius: 9999px
+iOS 6.0 元素同时存在阴影 边框 圆角时 圆角50%不圆 : wrap div</p>
+<h3 id="ios-position-fixed">iOS position fixed</h3>
+<p>fix定位 input输入时 fix层错位: focus-&gt;static blur-&gt;fixed iOS7.1修复</p>
+<h3 id="ios-body-">iOS 禁止 body 滚动</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="tag">body</span><span class="class">.lock-position</span> <span class="rules">{
+  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">100</span>%</span></span>;
+  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;
+  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%</span></span>;
+  <span class="rule"><span class="attribute">position</span>:<span class="value"> fixed</span></span>;
+<span class="rule">}</span></span>
+</pre></td></tr></table></figure>
+
+<p>....</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/share/">share</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2014/04/13/slider-font-end2/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:yoursite.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
+  
+    <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/categories/titanium/">titanium</a><small>2</small></li>
+  
+    <li><a href="/categories/web/">web</a><small>15</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/angularjs/">angularjs</a><small>15</small></li>
+  
+    <li><a href="/tags/audio/">audio</a><small>1</small></li>
+  
+    <li><a href="/tags/bootstrap/">bootstrap</a><small>1</small></li>
+  
+    <li><a href="/tags/grunt/">grunt</a><small>1</small></li>
+  
+    <li><a href="/tags/iOS/">iOS</a><small>1</small></li>
+  
+    <li><a href="/tags/karma/">karma</a><small>1</small></li>
+  
+    <li><a href="/tags/mic/">mic</a><small>1</small></li>
+  
+    <li><a href="/tags/share/">share</a><small>2</small></li>
+  
+    <li><a href="/tags/summary/">summary</a><small>1</small></li>
+  
+    <li><a href="/tags/test/">test</a><small>4</small></li>
+  
+    <li><a href="/tags/titanium/">titanium</a><small>2</small></li>
+  
+    <li><a href="/tags/war3/">war3</a><small>1</small></li>
+  
+    <li><a href="/tags/wcg/">wcg</a><small>1</small></li>
+  
+    <li><a href="/tags/yeoman/">yeoman</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2014 杨鑫诚Bruce
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

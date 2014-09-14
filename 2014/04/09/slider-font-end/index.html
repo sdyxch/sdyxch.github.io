@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>分享 | 我是你爸爸</title>
+  <title>分享(设计师) | 我是你爸爸</title>
   <meta name="author" content="杨鑫诚Bruce">
   
   <meta name="description" content="我是你爸爸">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="分享"/>
+  <meta property="og:title" content="分享(设计师)"/>
   <meta property="og:site_name" content="我是你爸爸"/>
 
   
@@ -49,6 +49,18 @@
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
   <div class="post-content">
     <header>
       
@@ -57,24 +69,23 @@
       
       
   
-    <h1 class="title">分享</h1>
+    <h1 class="title">分享(设计师)</h1>
   
 
     </header>
     <div class="entry">
       
-        <h1>Designer</h1>
-<h2>Design</h2>
+        <h2 id="design">Design</h2>
 <ul>
 <li>尺寸偶数</li>
 <li>可点击区域最小88px(2x图) 宽度满屏的列表类点击区域可适当较小(ios list 84px)</li>
 </ul>
-<h2>PS Plugins</h2>
+<h2 id="ps-plugins">PS Plugins</h2>
 <ul>
 <li><a href="http://www.cutandslice.me/" target="_blank">切图工具 cutandslice</a></li>
 </ul>
-<h2>Mobile Web Font</h2>
-<h3>iOS</h3>
+<h2 id="mobile-web-font">Mobile Web Font</h2>
+<h3 id="ios">iOS</h3>
 <ul>
 <li>中文默认: 常州华文的黑体-简</li>
 <li><a href="http://iosfonts.com/" target="_blank">iOS Fonts</a></li>
@@ -82,7 +93,7 @@
 <li><a href="http://support.apple.com/kb/HT5484?viewlocale=zh_CN" target="_blank">iOS6 Fonts</a></li>
 <li><a href="http://support.apple.com/kb/HT4980?viewlocale=zh_CN" target="_blank">iOS5 Fonts</a></li>
 </ul>
-<h3>Android</h3>
+<h3 id="android">Android</h3>
 <ul>
 <li>Droid Sans</li>
 <li>Droid Serif</li>
@@ -92,121 +103,57 @@
 <li>Droid Sans Hebrew</li>
 <li>Droid Sans Japanese：包含用于日文的汉字和假名。</li>
 <li>Droid Sans Thai</li>
+<li>Roboto: 4.0+</li>
+<li>无衬线字体: 第三方</li>
 </ul>
-<h3>Emoj</h3>
+<h3 id="emoj">Emoj</h3>
 <p><a href="http://www.easyapns.com/iphone-emoji-alerts" target="_blank">emoji unicode</a></p>
-<h3>Custom Icon Font</h3>
+<h3 id="custom-icon-font">Custom Icon Font</h3>
 <ul>
 <li><a href="http://icomoon.io/" target="_blank">icomoon</a></li>
 <li><a href="http://fontello.com/" target="_blank">fontello</a></li>
+<li><a href="http://www.iconfont.cn/" target="_blank">iconfont</a></li>
 </ul>
 <p><img src="http://ued.taobao.org/blog/wp-content/uploads/2013/09/preview.jpg" style="width:50%; margin:auto;display:block;"/></p>
-<h3>Native iOS App Font</h3>
-<p>但其实从iOS6开始 苹果就支持动态下载中文字体到系统中<br>所有应用间共享</p>
-<h2>Inline SVG</h2>
+<h4 id="-">优点</h4>
+<ul>
+<li>分辨率无关</li>
+<li>文件小</li>
+<li>加载性能</li>
+<li>支持CSS样式：可以利用CSS来定义大小、颜色、阴影、hover状态、透明度、渐变...</li>
+<li>兼容性好：老的移动端浏览器，Android 2.1以下 Opera mini</li>
+</ul>
+<h4 id="-">缺点</h4>
+<ul>
+<li>颜色样式单一</li>
+<li>unicode 冲突: PUA安全区域的字符编码 U+E000..U+F8FF</li>
+</ul>
+<h4 id="-">注意</h4>
+<ul>
+<li>图形需要闭合，不要用stroke，否则会显示不出来</li>
+<li>图形合并并扩展</li>
+<li>用单色</li>
+</ul>
+<h3 id="native-ios-app-font">Native iOS App Font</h3>
+<p>但其实从iOS6开始 苹果就支持动态下载中文字体到系统中
+所有应用间共享</p>
+<h2 id="inline-svg">Inline SVG</h2>
 <ul>
 <li>~iOS 5.0</li>
 <li>~Android 3.0</li>
 </ul>
-<h2>Responsive Web Design</h2>
+<h2 id="responsive-web-design">Responsive Web Design</h2>
 <p><img src="http://uisdc.qiniudn.com/wp-content/uploads/2014/02/rpwd_design.png" style="width:50%; margin:auto;display:block;"/></p>
 <ul>
 <li><a href="http://mediaqueri.es/" target="_blank">mediaqueri.es</a></li>
 </ul>
-<h2>Resource</h2>
+<h2 id="resource">Resource</h2>
 <ul>
+<li><a href="http://ios7colors.com/" target="_blank">iOS7 Colors</a></li>
 <li><a href="http://isux.tencent.com/ios-human-interface-guidelines-ui-design-basics-ios7.html" target="_blank">iOS7人机交互指南</a></li>
 <li><a href="http://www.topfun.us/adchs/index.html" target="_blank">Android Design</a></li>
 <li><a href="http://goodui.org/?utm_source=feweekly&amp;utm_campaign=issue29&amp;utm_medium=mail" target="_blank">A Good User Interface</a></li>
 </ul>
-<p><br><br><br><br><br><br><br><br><br><br><br></p>
-<h1>Developer</h1>
-<h2>Media Query</h2>
-<ul>
-<li><a href="http://nmsdvid.com/snippets/" target="_blank">Media Query Snippets</a></li>
-<li><a href="http://bjango.com/articles/min-device-pixel-ratio/" target="_blank">Ratio Snippets</a></li>
-</ul>
-<h2>Responsive Web</h2>
-<p>太多…<br>- <a href="http://lab.maltewassermann.com/viewport-resizer/" target="_blank">resizer</a></p>
-<h2>Viewport</h2>
-<ul>
-<li>width : viewport的宽度</li>
-<li>height : viewport的高度</li>
-<li>initial-scale : 初始的缩放比例</li>
-<li>minimum-scale : 允许用户缩放到的最小比例</li>
-<li>maximum-scale : 允许用户缩放到的最大比例</li>
-<li>user-scalable : 用户是否可以手动缩放</li>
-<li>minimal-ui iOS7.1 : 隐藏顶部地址栏和底部导航栏</li>
-</ul>
-<h2>Hairlines</h2>
-<p><img src="http://mir.aculo.us/wp-content/uploads/2013/09/hairlines1.png" style="width:80%; margin:auto;display:block;"></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="code"><pre>/* 1px hairline, using a GIF  */
-background: repeat-x bottom left
-  url(data:image/gif;base64,R0lGODlhAQACAPABAMjHzP///yH/C1hNUCBEYXRhWE1QAz94cAAh+QQFAAABACwAAAAAAQACAAACAgwKADs=);
-background-size: 100% 1px;
-
-/* 1px hairline, using SVG (background-size property not required) */
-background: repeat-x bottom left
-  url("data:image/svg+xml;utf8,<span class="tag">&lt;<span class="title">svg</span> <span class="attribute">xmlns</span>=<span class="value">'http://www.w3.org/2000/svg'</span> <span class="attribute">width</span>=<span class="value">'1'</span> <span class="attribute">height</span>=<span class="value">'1'</span>&gt;</span><span class="tag">&lt;<span class="title">rect</span> <span class="attribute">fill</span>=<span class="value">'#ff0000'</span> <span class="attribute">x</span>=<span class="value">'0'</span> <span class="attribute">y</span>=<span class="value">'0'</span> <span class="attribute">width</span>=<span class="value">'1'</span> <span class="attribute">height</span>=<span class="value">'0.5'</span>/&gt;</span><span class="tag">&lt;/<span class="title">svg</span>&gt;</span>");
-</pre></td></tr></table></figure>
-
-<h2>Font</h2>
-<ul>
-<li>-apple-system-font</li>
-<li>html default font: 16px</li>
-<li>em  rem(root em)</li>
-<li>@font-face</li>
-<li>@font-face 标题模糊: font-weight: 400;</li>
-<li>iOS 横屏禁止字体放大: -webkit-text-size-adjust: none</li>
-<li>反锯齿: -webkit-font-smoothing:antialiased</li>
-</ul>
-<h2>Image</h2>
-<ul>
-<li>css sprite  &amp;  background-image &amp; image-set</li>
-<li>弹性图片</li>
-</ul>
-<h2>Flex Box</h2>
-<ul>
-<li><a href="http://www.w3cplus.com/blog/666.html" target="_blank">伸缩盒模型</a></li>
-</ul>
-<h2>Tips</h2>
-<h3>iOS Native Like Scroll</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-</pre></td><td class="code"><pre><span class="tag">body</span> <span class="rules">{
-  <span class="rule"><span class="attribute">-webkit-overflow-scrolling</span>:<span class="value"> touch;</span></span>
-<span class="rule">}</span></span>
-</pre></td></tr></table></figure>
-
-<h3>GPU加速 和 消除transition闪屏</h3>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-</pre></td><td class="code"><pre><span class="literal">-</span><span class="comment">webkit</span>-<span class="comment">transform</span>-<span class="comment">style:</span> <span class="comment">preserve</span>-<span class="comment">3d;</span>
-<span class="literal">-</span><span class="comment">webkit</span>-<span class="comment">backface</span>-<span class="comment">visibility:</span> <span class="comment">hidden;
-</pre></td></tr></table></figure>
-
-<h3>inline-block</h3>
-<p>inline-block元素之间 会有空白 : 写成一行..</p>
-<h3>Click</h3>
-<ul>
-<li>点击区域闪一下: -webkit-tap-highlight-color: rgba(0,0,0,0);</li>
-<li>:active伪类样式无效: body ontouchstart=“”</li>
-<li>点透: pointer-event: none</li>
-</ul>
-<h3>border-radius</h3>
-<p>Android &lt;=2.3 border-radius 不能使用% 圆形 : border-radius: 9999px<br>iOS 6.0 元素同时存在阴影 边框 圆角时 圆角50%不圆 : wrap div</p>
-<h3>iOS position fixed</h3>
-<p>fix定位 input输入时 fix层错位: fous-&gt;static blur-&gt;fixed iOS7.1修复</p>
-<p>….</p>
 <p>Have fun!!!</p>
 
       
@@ -283,7 +230,7 @@ background: repeat-x bottom left
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>4</small></li>
+    <li><a href="/categories/blog/">blog</a><small>5</small></li>
   
     <li><a href="/categories/iOS/">iOS</a><small>1</small></li>
   
@@ -314,7 +261,7 @@ background: repeat-x bottom left
   
     <li><a href="/tags/mic/">mic</a><small>1</small></li>
   
-    <li><a href="/tags/share/">share</a><small>1</small></li>
+    <li><a href="/tags/share/">share</a><small>2</small></li>
   
     <li><a href="/tags/summary/">summary</a><small>1</small></li>
   
