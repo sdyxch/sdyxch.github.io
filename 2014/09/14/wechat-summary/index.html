@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>grunt angular templates | 我是你爸爸</title>
+  <title>一个蛋疼的微信项目 | 我是你爸爸</title>
   <meta name="author" content="杨鑫诚Bruce">
   
   <meta name="description" content="我是你爸爸">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="grunt angular templates"/>
+  <meta property="og:title" content="一个蛋疼的微信项目"/>
   <meta property="og:site_name" content="我是你爸爸"/>
 
   
@@ -65,46 +65,136 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2013-11-17T15:25:00.000Z"><a href="/2013/11/17/angular-grunt-ngtemplates/">Nov 17 2013</a></time>
+        <time datetime="2014-09-14T13:30:00.000Z"><a href="/2014/09/14/wechat-summary/">Sep 14 2014</a></time>
       
       
   
-    <h1 class="title">grunt angular templates</h1>
+    <h1 class="title">一个蛋疼的微信项目</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><a href="https://github.com/ericclemmons/grunt-angular-templates" target="_blank">grunt-angular-templates</a>
-模板文件会导致每次都去服务器请求..
-使用 grunt-angular-templates grunt build时 将模板文件转为js文件
-(html-&gt;stirng-&gt;$templateCache)
-再通过manifest作本地cache
-妥妥的..</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="code"><pre>ngtemplates:
-  dist:
-    options:
-      base: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
-      <span class="preprocessor"># concat: '&lt;%= yeoman.dist %&gt;/scripts/scripts.js'</span>
-      <span class="keyword">module</span>: yeomanConfig.name
-    cwd: <span class="comment">'<span class="xmlDocTag">&lt;%= yeoman.app %&gt;</span>'</span>
-    src: <span class="comment">'views/**.html'</span>
-    dest: <span class="comment">'.tmp/scripts/templateCache.js'</span>
-</pre></td></tr></table></figure>
-
-<figure class="highlight"><table><tr><td class="gutter"><pre>1
-</pre></td><td class="code"><pre><span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"scripts/templateCache.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-</pre></td></tr></table></figure>
-
+        <h2 id="-">历史版本</h2>
+<h3 id="v0">v0</h3>
+<ol>
+<li>自动回复(固定)</li>
+<li>行情</li>
+</ol>
+<ul>
+<li>one grunt one bower</li>
+<li>front</li>
+</ul>
+<h3 id="v1">v1</h3>
+<ol>
+<li>自动回复(可配置)</li>
+<li>猜涨跌 刮刮乐 .. 各种活动</li>
+<li><del>微社区</del></li>
+<li><del>微店</del></li>
+</ol>
+<ul>
+<li>front<ul>
+<li>images - prefix or name</li>
+<li>scripes - prefix or name</li>
+<li>styles - prefix or name</li>
+</ul>
+</li>
+<li>admin<ul>
+<li>回复规则</li>
+<li>活动逻辑</li>
+<li>统计</li>
+</ul>
+</li>
+</ul>
+<h2 id="-">现在</h2>
+<h3 id="-">想法</h3>
+<ul>
+<li>要有情怀</li>
+<li>干一番大事业！</li>
+</ul>
+<h3 id="-">前端</h3>
+<ul>
+<li>模块化 模块 = 小项目 核心业务 + 活动</li>
+<li>每个模块 基于bower grunt(历史原因 + 当时gulp不熟...)</li>
+<li>config.json</li>
+<li>开放 whatever<ul>
+<li>css<ul>
+<li>sass + bourbon</li>
+<li>stylus + nib</li>
+<li>autoprefixer</li>
+<li>css</li>
+</ul>
+</li>
+<li>lib<ul>
+<li>backbone.js</li>
+<li>vue.js</li>
+<li>angular.js</li>
+<li>裸</li>
+</ul>
+</li>
+<li>module<ul>
+<li>require.js</li>
+<li>browserify</li>
+<li>裸</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>grunt hub<ul>
+<li>grunt build</li>
+<li>grunt build</li>
+<li>grunt build
+...</li>
+</ul>
+</li>
+</ul>
+<h3 id="-">后端</h3>
+<ol>
+<li>node.js 不熟...</li>
+<li>大后端 太高深 负载均衡 性能监控 大数据...</li>
+</ol>
+<ul>
+<li>模块化 核心业务 + 活动</li>
+<li>config.json</li>
+<li>减少自己的工作量<ul>
+<li>proxy</li>
+</ul>
+</li>
+<li>用别人的东西<ul>
+<li>wechat</li>
+<li>serverConfig</li>
+<li>..</li>
+</ul>
+</li>
+</ul>
+<h3 id="-">部署</h3>
+<ul>
+<li>server</li>
+<li>each front modules</li>
+</ul>
+<h2 id="-">然后</h2>
+<h3 id="-">问题解决了吗？</h3>
+<ol>
+<li>&quot;这个图老大不同意 换一个&quot;</li>
+<li>&quot;这个文案老大的老大不同意 换一下&quot;</li>
+<li>&quot;这个逻辑老大的老大的老大不喜欢 改一下&quot;</li>
+</ol>
+<h3 id="wtf-">WTF!</h3>
+<p>测试环境没人看 真实环境改呀改! blablabla..</p>
+<h3 id="-">解决问题</h3>
+<h4 id="-">按需部署 部署模块化</h4>
+<ul>
+<li>shell 不会..</li>
+<li>那就用gulp吧!</li>
+</ul>
+<h2 id="-">总结</h2>
+<ul>
+<li>开放</li>
+<li>持续学习</li>
+<li>组合最精简的工具</li>
+<li>做自己擅长的事情</li>
+</ul>
+<p>Have fun!</p>
 
       
     </div>
@@ -113,13 +203,13 @@
         
   
   <div class="categories">
-    <a href="/categories/web/">web</a>
+    <a href="/categories/blog/">blog</a>
   </div>
 
         
   
   <div class="tags">
-    <a href="/tags/angularjs/">angularjs</a>
+    <a href="/tags/share/">share</a>
   </div>
 
         
@@ -162,7 +252,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2013/11/17/angular-grunt-ngtemplates/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2014/09/14/wechat-summary/" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
